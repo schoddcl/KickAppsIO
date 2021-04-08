@@ -55,11 +55,11 @@ public class Controller implements Initializable {
     @FXML
     void addButtonClicked(ActionEvent event) throws IOException {
         // Changes the page to an add page
-        Parent addParent = FXMLLoader.load(getClass().getResource("/resources/add.fxml"));
-        Scene addScene = new Scene(addParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(addScene);
-        window.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();;
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     // Search Text Field
