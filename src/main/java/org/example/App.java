@@ -13,24 +13,10 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
-
-//    @Override
-//    public void start(Stage primaryStage) {
-//        try {
-//            //Loads the homepage
-//            Parent homepageRoot = FXMLLoader.load(getClass().getResource("homepage"));
-//            Scene homepage = new Scene(homepageRoot);
-//            primaryStage.setScene(homepage);
-//            primaryStage.show();
-//
-//
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     private static Scene scene;
     @Override
     public void start(Stage stage) throws IOException {
+
         scene = new Scene(loadFXML("homepage"));
         stage.setScene(scene);
         stage.show();
