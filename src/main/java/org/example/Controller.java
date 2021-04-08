@@ -128,7 +128,7 @@ public class Controller implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         ResultSet rs = null;
         try {
-            DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+           // DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
             String dbURL = "jdbc:sqlserver://kickapps.database.windows.net:1433;database=KickApps;user=KickApps@kickapps;password={Cse201Server};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
             String user = "KickApps@kickapps";
             String pass = "Cse201Server";
