@@ -117,11 +117,12 @@ public class Controller implements Initializable {
 
     //When comments button clicked
     void commentsClicked(ActionEvent event, int profID) throws IOException{
-        Parent addParent = FXMLLoader.load(getClass().getResource("commentsView"));
-        Scene addScene = new Scene(addParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(addScene);
-        window.show();
+        // Changes the page to an add page
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("comments.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();;
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @Override
