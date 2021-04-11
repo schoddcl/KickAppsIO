@@ -6,93 +6,87 @@ import javafx.scene.control.Button;
 
 public class Professor {
 
-    private String firstName, lastName, college, position, degree;
-    private double rating;
-    private Integer yearsWorked, profID;
-    private Button comments;
+	private String firstName, lastName, college, position, degree;
+	private double rating;
+	private Integer yearsWorked, profID;
 
-    public Professor(Integer profID, String firstName, String lastName, String college, String position, String degree, Double rating,
-                     Integer yearsWorked, Button comments) {
-        this.profID = profID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.college = college;
-        this.position = position;
-        this.degree = degree;
-        this.rating = rating;
-        this.yearsWorked = yearsWorked;
-        this.comments = comments;
+	public Professor(Integer profID, String firstName, String lastName, Double rating, String college, String position,
+			Integer yearsWorked, String degree) {
+		this.profID = profID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.college = college;
+		this.position = position;
+		this.degree = degree;
+		this.rating = rating;
+		this.yearsWorked = yearsWorked;
+	}
 
-    }
+	public Integer getProfID() {
+		return profID;
+	}
 
+	public String getFirstName() {
+		return firstName;
+	}
 
+	public String getLastName() {
+		return lastName;
+	}
 
-    public Integer getProfID() {
-        return profID;
-    }
+	public String getCollege() {
+		return college;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getPosition() {
+		return position;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getDegree() {
+		return degree;
+	}
 
-    public String getCollege() {
-        return college;
-    }
+	public double getRating() {
+		return rating;
+	}
 
-    public String getPosition() {
-        return position;
-    }
+	public int getYearsWorked() {
+		return yearsWorked;
+	}
 
-    public String getDegree() {
-        return degree;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public double getRating() {
-        return rating;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public int getYearsWorked() {
-        return yearsWorked;
-    }
+	public void setCollege(String college) {
+		this.college = college;
+	}
 
-    public Button getComments() {
-        return comments;
-    }
+	public void setPosition(String position) {
+		this.position = position;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
 
-    public void setCollege(String college) {
-        this.college = college;
-    }
+	public void setYearsWorked(int yearsWorked) {
+		this.yearsWorked = yearsWorked;
+	}
 
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public void setDegree(String degree) {
-        this.degree = degree;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public void setYearsWorked(int yearsWorked) {
-        this.yearsWorked = yearsWorked;
-    }
-
-    public void setComments(Button comments) {
-        this.comments = comments;
-    }
+	@Override
+	public String toString() {
+		return String.format(
+				"ProfessorID: %d | %s %s %.1f %s %s %d %s",
+				profID, firstName, lastName, rating, college, position, yearsWorked, degree);
+	}
 
 }
