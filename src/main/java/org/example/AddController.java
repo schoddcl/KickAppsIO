@@ -14,32 +14,34 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class AddController implements Initializable{
+public class AddController implements Initializable {
+	int profileID = -1;
 
-    //Back button on add page
-    @FXML
-    private Button backButton;
+	// Back button on add page
+	@FXML
+	private Button backButton;
 
-    private static Scene scene;
-    @FXML
-    void backButtonClicked(ActionEvent event) throws IOException {
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(loadFXML("homepage"));
-        window.setScene(scene);
-        window.show();
-    }
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
+	private static Scene scene;
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
+	@FXML
+	void backButtonClicked(ActionEvent event) throws IOException {
+		Parent root = null;
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+		try {
+			root = fxmlLoader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Controller controller = fxmlLoader.getController();
+		controller.setProfile(this.profileID);
+		Stage newHomepage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		newHomepage.setScene(new Scene(root));
+		newHomepage.show();
+	}
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-
-    }
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+	}
 
 }

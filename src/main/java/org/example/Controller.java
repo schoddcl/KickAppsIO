@@ -23,11 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -38,20 +36,66 @@ import javafx.scene.Node;
 //import jdk.internal.icu.text.UnicodeSet;
 
 public class Controller implements Initializable {
+	// Profile, set as -1 to start
+	int profileID = -1;
+
+	// SubmissionsButton
+	@FXML
+	private Button submissionsButton;
+	@FXML
+	void submissionsButtonClicked(ActionEvent event) throws IOException {
+		// Changes the page to an add page
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("submissions.fxml"));
+		Parent root = fxmlLoader.load();
+
+		SubmissionsController submissionsController = fxmlLoader.getController();
+		SubmissionsController.profileID = this.profileID;
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		stage.setScene(new Scene(root));
+		stage.show();
+	}
 
 	// Login Button
 	@FXML
 	private Button loginButton;
 
 	// Runs when login button is clicked
+	Stage loginStage;
+
 	@FXML
 	void loginButtonClicked(ActionEvent event) throws IOException {
-		// Loads the login popup window
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
-		Parent root = fxmlLoader.load();
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
+
+		if (loginButton.getText().equals("Logout")) {
+			profileID = -1;
+			Parent root = null;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+			try {
+				root = fxmlLoader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.close();
+
+			Controller controller = fxmlLoader.getController();
+			Stage newHomepage = new Stage();
+			newHomepage.setScene(new Scene(root));
+			newHomepage.show();
+		} else {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+			Parent root = fxmlLoader.load();
+
+			// Pass in old stage value so it can be changed when logging in
+			LoginController loginController = fxmlLoader.getController();
+			loginController.oldStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+			Stage loginStage = new Stage();
+			loginStage.setScene(new Scene(root));
+			loginStage.show();
+		}
 	}
 
 	// Add Button
@@ -64,8 +108,12 @@ public class Controller implements Initializable {
 		// Changes the page to an add page
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add.fxml"));
 		Parent root = fxmlLoader.load();
+
+		AddController addController = fxmlLoader.getController();
+		addController.profileID = this.profileID;
+
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		;
+
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
@@ -73,6 +121,26 @@ public class Controller implements Initializable {
 	// Search Text Field
 	@FXML
 	private TextField searchField;
+
+	@FXML
+	private Label profileLabel;
+
+	public void setProfile(int profileID) {
+		DBConnector connection = new DBConnector();
+		Connection conn = connection.connect();
+		ResultSet rs = connection.getProfileFromID(conn, profileID);
+		try {
+			while (rs.next()) {
+				profileLabel.setText("Profile: " + rs.getString(2));
+				loginButton.setText("Logout");
+				submissionsButton.setVisible(true);
+				this.profileID = profileID;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	// Table
 	@FXML
@@ -138,9 +206,10 @@ public class Controller implements Initializable {
 
 		CommentsController commentsController = fxmlLoader.getController();
 		commentsController.setProfComments(prof);
+		commentsController.setProfile(this.profileID);
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		;
+
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
@@ -175,29 +244,14 @@ public class Controller implements Initializable {
 
 			@Override
 			public TableCell<Professor, String> call(TableColumn<Professor, String> p) {
-				// Custon cell with comments feature
+				// Custom cell with comments feature
 				return new ButtonCell();
 			}
 
 		});
 
-//		ObservableList<Professor> professors = FXCollections.observableArrayList();
 		ObservableList<Professor> professors = dbconnector.getProfessorsObservableList(rs);
-		// This adds the data to Professor objects and accounts for the fact that the
-		// degree area is null sometimes
-//		try {
-//			while (rs.next()) {
-//				if (rs.getString(9) == null) {
-//					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(6),
-//							rs.getString(7), "", rs.getDouble(5), rs.getInt(8)));
-//				} else {
-//					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(6),
-//							rs.getString(7), rs.getString(9), rs.getDouble(5), rs.getInt(8)));
-//				}
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+
 		// Loads the data into table
 		tableView.setItems(professors);
 
@@ -237,6 +291,5 @@ public class Controller implements Initializable {
 		SortedList<Professor> sortedProfessors = new SortedList<>(filteredProfessors);
 		sortedProfessors.comparatorProperty().bind(tableView.comparatorProperty());
 		tableView.setItems(sortedProfessors);
-
 	}
 }

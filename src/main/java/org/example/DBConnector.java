@@ -26,6 +26,42 @@ public class DBConnector {
 		return null;
 	}
 
+	public ResultSet executeQuery(String query) {
+		ResultSet rs = null;
+		Connection conn = connect();
+		if (conn != null) {
+			try {
+				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
+				Statement select = conn.createStatement();
+				// Get the table of the professors
+				rs = select.executeQuery(query);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return rs;
+	}
+
+	public ResultSet getProfessorResultSet(Connection conn) {
+		return executeQuery("Select * From tblProfessors");
+	}
+	public ResultSet getProfessorFromID(Connection conn, int profID) {
+		return executeQuery("Select * From tblProfessors where profID = " + profID);
+	}
+
+	public ResultSet getProfComments(Connection conn, int profID) {
+		return executeQuery("Select comment from tblComments where profID = " + profID);
+	}
+
+	public ResultSet getProfileFromLogin(Connection conn, String usernameField, String passwordField) {
+		return executeQuery("select profileID from tblProfiles where username = '" + usernameField
+				+ "' and password = '" + passwordField + "'");
+	}
+
+	public ResultSet getProfileFromID(Connection conn, int profileID) {
+		return executeQuery("Select * from tblProfiles where profileID = " + profileID);
+	}
+
 	public ObservableList<Professor> getProfessorsObservableList(ResultSet rs) {
 		ObservableList<Professor> professors = FXCollections.observableArrayList();
 		try {
@@ -42,20 +78,5 @@ public class DBConnector {
 			e.printStackTrace();
 		}
 		return professors;
-	}
-
-	public ResultSet getProfessorResultSet(Connection conn) {
-		ResultSet rs = null;
-		if (conn != null) {
-			try {
-				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
-				Statement select = conn.createStatement();
-				// Get the table of the professors
-				rs = select.executeQuery("Select * From tblProfessors");
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return rs;
 	}
 }
