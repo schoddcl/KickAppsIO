@@ -4,6 +4,7 @@ module org.example {
     requires java.sql;
 	requires javafx.base;
 	requires mssql.jdbc;
+	requires org.junit.jupiter.api;
 	
 
     opens org.example to javafx.fxml;
