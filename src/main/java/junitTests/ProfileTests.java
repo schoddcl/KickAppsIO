@@ -27,4 +27,11 @@ class ProfileTests {
 		p.setPassword("password");
 		assertEquals("password", p.getPassword());
 	}
+	
+//	@Test
+//	void wrongPassword() {
+//		Profile p = new Profile("Luke", "notPassword");
+//		p.setPassword("password");
+//		assertNotEquals("notPassword", p.getPassword());
+//	}
 }

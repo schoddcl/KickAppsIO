@@ -22,6 +22,7 @@ public class Professor {
 		this.yearsWorked = yearsWorked;
 	}
 
+	// Getter for Prof ID
 	public Integer getProfID() {
 		return profID;
 	}
@@ -30,6 +31,7 @@ public class Professor {
 		return firstName;
 	}
 
+	// Getter for last name
 	public String getLastName() {
 		return lastName;
 	}
