@@ -1,3 +1,4 @@
+package junitTests;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,64 +10,62 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement
 
-
+import org.example.User;
 import org.junit.jupiter.api.Test;
 
-class AdminTests {
+class UserTests {
 
 	@Test
-	void canCallAccessSubmissions() {
+	void canCallViewProfessors() {
+		String firstName = "";
+		User u = new User("Luke", "Sarrazine");
+		ResultSet rs = u.viewProfessors(1, "Matthew", "Stephan");
+		try {
+			while(rs.next()) {
+				firstName = rs.getString(3);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		assertEquals("Matthew", firstName);
+	}
+
+	@Test
+	void canCallSubmit() {
 		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine");
-		ResultSet rs = a.accessSubmissions();
+		User u = new User("Luke", "Sarrazine");
+		u.submit(0, 5.0, "Miami University", "Professor", 2, "CSE201", "PHD", false);
+		ResultSet rs = connectDatabase("Select * from tblAdmissions where adminID = 0", true);
 		try {
 			while(rs.next()) {
 				result = rs.getString(2);
-				break;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("college", result);
+		assertEquals("Miami University", result);
 	}
 	
 	@Test
-	void canCallConfirmSubmission() {
+	void canCallUpdateComments() {
 		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine");
-		a.confirmSubmission(4);
-		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 4", true);
+		User u = new User("Luke", "Sarrazine");
+		String query = "INSERT INTO tblComments VALUES(3, 0, 'comment')";
+		connectDatabase(query, false);
+		u.updateComments("testComment", 1);
+		ResultSet rs = connectDatabase("Select * from tblComments where profID = 0", true);
 		try {
 			while(rs.next()) {
-				result = rs.getString(2);
-				break;
+				result = rs.getString(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("true", result);
+		System.out.print(result);
+		assertEquals("Miami University", result);
+		
 	}
-	
-	@Test
-	void canCallDenySubmission() {
-		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine");
-		a.denySubmission(4);
-		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 4", true);
-		try {
-			while(rs.next()) {
-				result = rs.getString(2);
-				break;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		assertEquals("false", result);
-	}
-	
+
 	public ResultSet connectDatabase(String query, boolean isQuery) {
 		// Connect to database
 		ResultSet rs = null;

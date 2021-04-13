@@ -3,6 +3,7 @@ module org.example {
     requires javafx.fxml;
     requires java.sql;
 	requires javafx.base;
+	requires mssql.jdbc;
 	
 
     opens org.example to javafx.fxml;

@@ -1,6 +1,9 @@
+package junitTests;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.example.Profile;
 import org.junit.jupiter.api.Test;
 
 class ProfileTests {
