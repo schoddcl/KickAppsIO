@@ -16,8 +16,12 @@ public class Admin extends User {
 		return rs;
 	}
 	
-	public void confirmSubmission(int subID) {
+	public void confirmSubmission(int subID, int profID, int profileID, String firstName, 
+			String lastName, double rateProfScore, String college, String position, int yearsWorked, String degree) {
 		String query = "UPDATE tblAdmissions SET subType = 'true' where subID = " + subID;
+		connectDatabase(query, false);
+		query = "INSERT INTO tblProfessors VALUES('" + profID + "," + profileID + "," + firstName + "," + lastName + "," + rateProfScore + ","
+				+ college + "," + position + "," + yearsWorked + "," + degree + "', 0)";
 		connectDatabase(query, false);
 	}
 	
