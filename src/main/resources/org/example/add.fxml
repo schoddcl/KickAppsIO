@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.AddController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.AddController">
     <top>
         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
@@ -48,13 +48,13 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="19.0" layoutY="51.0" />
-                <TextField layoutX="184.0" layoutY="51.0" />
-                <TextField layoutX="350.0" layoutY="51.0" />
-                <TextField layoutX="516.0" layoutY="51.0" />
-                <TextField layoutX="19.0" layoutY="116.0" />
-                <TextField layoutX="184.0" layoutY="116.0" />
-                <TextField layoutX="350.0" layoutY="116.0" />
+                <TextField fx:id="lastName" layoutX="19.0" layoutY="51.0" />
+                <TextField fx:id="firstName" layoutX="184.0" layoutY="51.0" />
+                <TextField fx:id="rateProfScore" layoutX="350.0" layoutY="51.0" />
+                <TextField fx:id="college" layoutX="516.0" layoutY="51.0" />
+                <TextField fx:id="position" layoutX="19.0" layoutY="116.0" />
+                <TextField fx:id="yearsWorked" layoutX="184.0" layoutY="116.0" />
+                <TextField fx:id="degree" layoutX="350.0" layoutY="116.0" />
                 <Button layoutX="522.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Submit" />
                 <Label layoutX="19.0" layoutY="30.0" prefHeight="21.0" prefWidth="128.0" text="Last Name" />
                 <Label layoutX="184.0" layoutY="30.0" prefHeight="21.0" prefWidth="128.0" text="First Name" />

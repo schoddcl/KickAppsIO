@@ -25,14 +25,27 @@ public class AddController implements Initializable {
 	@FXML
 	private Button backButton;
 	
-	/*
-	 * 	@FXML
-	private TextField usernameField;
-
 	@FXML
-	private PasswordField passwordField;
-	 */
+    private TextField lastName;
 
+    @FXML
+    private TextField firstName;
+
+    @FXML
+    private TextField rateProfScore;
+
+    @FXML
+    private TextField college;
+
+    @FXML
+    private TextField position;
+
+    @FXML
+    private TextField yearsWorked;
+
+    @FXML
+    private TextField degree;
+    
 	private static Scene scene;
 
 	@FXML
