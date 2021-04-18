@@ -2,6 +2,8 @@ package org.example;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -12,6 +14,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddController implements Initializable {
@@ -20,6 +24,14 @@ public class AddController implements Initializable {
 	// Back button on add page
 	@FXML
 	private Button backButton;
+	
+	/*
+	 * 	@FXML
+	private TextField usernameField;
+
+	@FXML
+	private PasswordField passwordField;
+	 */
 
 	private static Scene scene;
 
@@ -42,6 +54,20 @@ public class AddController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+	}
+	
+	void submitButtonClicked(ActionEvent event) throws IOException{
+		// if first/last == "" throw error
+		// if rating >5 or <0 throw error
+		// if years worked <0 throw error
+		// else allObjects = last, first, ....
+		// query string + allObject;
+		// insert query into 
+		/**
+		 * DBConnector connector = new DBConnector();
+		Connection conn = connector.connect();
+		ResultSet rs = connector.getProfileFromLogin(conn, usernameField.getText(), passwordField.getText());
+		 */
 	}
 
 }
