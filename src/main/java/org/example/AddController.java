@@ -80,6 +80,7 @@ public class AddController implements Initializable {
 		
 	}
 	
+	@FXML
 	void submitButtonClicked(ActionEvent event) throws IOException{
 		if(		firstName.getText() != "" && lastName.getText() != "" &&
 				(Double.parseDouble(rateProfScore.getText()) < 5.0 && Double.parseDouble(rateProfScore.getText()) > 0.0) &&
@@ -90,24 +91,6 @@ public class AddController implements Initializable {
 			"", degree.getText(), false);
 		} else {
 			submitFailedLabel.setText("Submit Failed!");
-			Parent root = null;
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
-			try {
-				root = fxmlLoader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.close();
-
-			Stage oldWindow = oldStage;
-			oldStage.close();
-
-			Controller controller = fxmlLoader.getController();
-			Stage newHomepage = new Stage();
-			newHomepage.setScene(new Scene(root));
-			newHomepage.show();
 		}
 		// if first/last == "" throw error
 		// if rating >5 or <0 throw error
