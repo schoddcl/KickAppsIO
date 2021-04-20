@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,6 +25,12 @@ public class AddController implements Initializable {
 	// Back button on add page
 	@FXML
 	private Button backButton;
+	
+	@FXML
+    private Button submitButton;
+	
+	@FXML
+	private Label submitFailedLabel;
 	
 	@FXML
     private TextField lastName;
@@ -63,6 +70,8 @@ public class AddController implements Initializable {
 		newHomepage.setScene(new Scene(root));
 		newHomepage.show();
 	}
+	
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -70,6 +79,16 @@ public class AddController implements Initializable {
 	}
 	
 	void submitButtonClicked(ActionEvent event) throws IOException{
+		if(		firstName.getText() != "" && lastName.getText() != "" &&
+				(Double.parseDouble(rateProfScore.getText()) < 5.0 && Double.parseDouble(rateProfScore.getText()) > 0.0) &&
+				Integer.parseInt(yearsWorked.getText()) > 0) {
+			DBConnector connector = new DBConnector();
+			Connection conn = connector.connect();
+			connector.submit(conn, 10, Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
+			"", degree.getText(), false);
+		} else {
+			submitFailedLabel.setText("Submit Failed!");
+		}
 		// if first/last == "" throw error
 		// if rating >5 or <0 throw error
 		// if years worked <0 throw error
@@ -82,5 +101,7 @@ public class AddController implements Initializable {
 		ResultSet rs = connector.getProfileFromLogin(conn, usernameField.getText(), passwordField.getText());
 		 */
 	}
+	
+	
 
 }

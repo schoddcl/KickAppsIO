@@ -19,7 +19,7 @@ public class Profile {
 		setPassword(password);
 	}
 	
-	public ResultSet connectDatabase(String query, boolean isQuery) {
+	public ResultSet connect(String query, boolean isQuery) {
 		// Connect to database
 		ResultSet rs = null;
 		try {

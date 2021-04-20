@@ -12,21 +12,21 @@ public class Admin extends User {
 
 	public ResultSet accessSubmissions() {
 		String query = "Select * From tblAdmissions";
-		ResultSet rs = connectDatabase(query, true);
+		ResultSet rs = connect(query, true);
 		return rs;
 	}
 	
 	public void confirmSubmission(int subID, int profID, int profileID, String firstName, 
 			String lastName, double rateProfScore, String college, String position, int yearsWorked, String degree) {
 		String query = "UPDATE tblAdmissions SET subType = 'true' where subID = " + subID;
-		connectDatabase(query, false);
+		connect(query, false);
 		query = "INSERT INTO tblProfessors VALUES('" + profID + "," + profileID + "," + firstName + "," + lastName + "," + rateProfScore + ","
 				+ college + "," + position + "," + yearsWorked + "," + degree + "', 0)";
-		connectDatabase(query, false);
+		connect(query, false);
 	}
 	
 	public void denySubmission(int subID) {
 		String query = "UPDATE tblAdmissions SET subType = 'false' where subID = " + subID;
-		connectDatabase(query, false);
+		connect(query, false);
 	}
 }

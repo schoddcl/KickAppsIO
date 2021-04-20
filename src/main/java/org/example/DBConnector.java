@@ -41,6 +41,21 @@ public class DBConnector {
 		}
 		return rs;
 	}
+	
+	public ResultSet executeUpdate(String query) {
+		ResultSet rs = null;
+		Connection conn = connect();
+		if (conn != null) {
+			try {
+				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
+				Statement statement = conn.createStatement();
+				rs = statement.executeQuery(query);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return rs;
+	}
 
 	public ResultSet getProfessorResultSet(Connection conn) {
 		return executeQuery("Select * From tblProfessors");
@@ -60,6 +75,21 @@ public class DBConnector {
 
 	public ResultSet getProfileFromID(Connection conn, int profileID) {
 		return executeQuery("Select * from tblProfiles where profileID = " + profileID);
+	}
+	
+	public void confirmSubmission(Connection conn, int subID, int profID, int profileID, String firstName, 
+		String lastName, double rateProfScore, String college, String position, int yearsWorked, String degree) {
+		String query = "UPDATE tblAdmissions SET subType = 'true' where subID = " + subID;
+		executeUpdate(query);
+		query = "INSERT INTO tblProfessors VALUES('" + profID + "," + profileID + "," + firstName + "," + lastName + "," + rateProfScore + ","
+				+ college + "," + position + "," + yearsWorked + "," + degree + "', 0)";
+		executeUpdate(query);
+	}
+	
+	public void submit(Connection conn, int profID, double rateMyProfessorScore, String college, String position, int yearsWorked,
+			String classes, String degree, boolean update) {
+		String query = "INSERT INTO tblAdmissions VALUES('"  + college + "', 0)";
+		executeUpdate(query);
 	}
 
 	public ObservableList<Professor> getProfessorsObservableList(ResultSet rs) {

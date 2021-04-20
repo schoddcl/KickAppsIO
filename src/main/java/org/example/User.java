@@ -21,20 +21,20 @@ public class User extends Profile {
 		//prof id for database
 		//username made up of 
 		String query = "Select * From tblProfessors WHERE profID = " + profID + " AND firstName LIKE '" + firstName + "' AND lastName LIKE '" + lastName + "'";
-		return connectDatabase(query, true);
+		return connect(query, true);
 		
 	}
 
 	public void submit(int profID, double rateMyProfessorScore, String college, String position, int yearsWorked,
 			String classes, String degree, boolean update) {
 		String query = "INSERT INTO tblAdmissions VALUES('"  + college + "', 0)";
-		connectDatabase(query, false);
+		connect(query, false);
 		
 	}
 
 	public void updateComments(String comment, int profID) {
 		String query = "UPDATE tblComments SET comment = comment + '\n" + comment + "' where profID = " + profID;
-		connectDatabase(query, false);
+		connect(query, false);
 		//separate Strings by new line at the beginning of each entry
 	}
 }

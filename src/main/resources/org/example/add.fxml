@@ -55,7 +55,7 @@
                 <TextField fx:id="position" layoutX="19.0" layoutY="116.0" />
                 <TextField fx:id="yearsWorked" layoutX="184.0" layoutY="116.0" />
                 <TextField fx:id="degree" layoutX="350.0" layoutY="116.0" />
-                <Button layoutX="522.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Submit" />
+                <Button fx:id="submitButton" layoutX="522.0" layoutY="116.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="25.0" prefWidth="143.0" text="Submit" />
                 <Label layoutX="19.0" layoutY="30.0" prefHeight="21.0" prefWidth="128.0" text="Last Name" />
                 <Label layoutX="184.0" layoutY="30.0" prefHeight="21.0" prefWidth="128.0" text="First Name" />
                 <Label layoutX="350.0" layoutY="30.0" prefHeight="21.0" prefWidth="128.0" text="Rating" />
@@ -63,6 +63,7 @@
                 <Label layoutX="19.0" layoutY="94.0" prefHeight="21.0" prefWidth="128.0" text="Position" />
                 <Label layoutX="184.0" layoutY="94.0" prefHeight="21.0" prefWidth="128.0" text="Years Worked" />
                 <Label layoutX="350.0" layoutY="94.0" prefHeight="21.0" prefWidth="128.0" text="Degree" />
+            <Label fx:id="submitFailedLabel" layoutX="524.0" layoutY="153.0" prefHeight="17.0" prefWidth="141.0" textFill="RED" />
             </children>
         </AnchorPane>
     </center>
