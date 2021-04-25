@@ -82,15 +82,7 @@
                 <exclude name="**/*.java"/>
                 <exclude name="**"/>
             </fileset>
-        </copy>
-        <copy includeemptydirs="false" todir="target/test-classes">
-            <fileset dir="src/test/java">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.xtend"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
+        </copy></target>
     <target name="clean">
         <delete dir="target/classes"/>
         <delete dir="target/test-classes"/>
@@ -105,12 +97,7 @@
             <src path="src/main/resources"/>
             <exclude name="**"/>
             <classpath refid="KickAppsIO.classpath"/>
-        </javac>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="target/test-classes" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src/test/java"/>
-            <classpath refid="KickAppsIO.classpath"/>
-        </javac>
-    </target>
+        </javac></target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
     <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
         <copy todir="${ant.library.dir}">
