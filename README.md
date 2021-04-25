@@ -6,7 +6,6 @@ The build script for the project is an auto generated ant build file from Eclips
 To run the app in your eclipse environment:
 1) Update your eclipse to newest version and enure it has ‘Projects from Git (with smart import)’ (https://www.eclipse.org/downloads/) (2021-03)
 2) Make sure your eclipse environment has the EGit plugin (https://download.eclipse.org/egit/updates/)
-
 3) Copy the information HTTPS clone information from the Code dropdown on Github
 4) Import project using ‘Projects from Git (with smart import)’ into your eclipse.
 5) Open and run 'build.xml'

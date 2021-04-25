@@ -1,0 +1,11 @@
+1) How can I run the app?
+	- Follow the README.md file and go through step by step
+2) How can I add a Professor?
+	- First make sure you have followed the README.md file.
+	Then log in to your account, press the ADD button, fill out
+	the fields you know, press submit, and finally wait for an admin
+	to accept or deny your submission.
+3) How can I comment?
+	- Log in to your account and find the Professor you wish to comment on.
+	Press the 'comments' button on the far right, type out the comment you
+	wish to add, and press the 'comment' button.
