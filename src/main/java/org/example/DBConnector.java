@@ -86,9 +86,10 @@ public class DBConnector {
 		executeUpdate(query);
 	}
 
-	public void submit(Connection conn, int profID, double rateMyProfessorScore, String college, String position, int yearsWorked,
-			String classes, String degree, boolean update) {
-		String query = "INSERT INTO tblAdmissions VALUES('"  + college + "', 0)";
+	public void submit(Connection conn, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
+			String degree, String status) {
+		String query = "INSERT INTO tblAdmissions (firstName, LastName, rateProfScore, college, position, yearsWorked, degree, status) "
+				+ String.format("VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", firstName, LastName, rateProfScore, college, position, yearsWorked, degree, status);
 		executeUpdate(query);
 	}
 
