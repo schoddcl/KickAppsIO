@@ -88,8 +88,8 @@ public class DBConnector {
 
 	public void submit(Connection conn, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
 			String degree) {
-		String query = "INSERT INTO tblAdmissions (firstName, LastName, rateProfScore, college, position, yearsWorked, degree, status) "
-				+ String.format("VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending')", firstName, LastName, rateProfScore, college, position, yearsWorked, degree);
+		String query = "INSERT INTO tblAdmissions (firstName, LastName, rateProfScore, college, position, yearsWorked, degree, status, adminID) "
+				+ String.format("VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending', 0)", firstName, LastName, rateProfScore, college, position, yearsWorked, degree);
 		executeUpdate(query);
 	}
 
