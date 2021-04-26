@@ -88,7 +88,7 @@ public class AddController implements Initializable {
 			DBConnector connector = new DBConnector();
 			Connection conn = connector.connect();
 			connector.submit(conn, firstName.getText(), lastName.getText(), Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
-			degree.getText(), status.getText());
+			degree.getText());
 		} else {
 			submitFailedLabel.setText("Submit Failed!");
 		}
