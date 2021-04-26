@@ -25,13 +25,13 @@ public class AddController implements Initializable {
 	// Back button on add page
 	@FXML
 	private Button backButton;
-	
+
 	@FXML
     private Button submitButton;
-	
+
 	@FXML
 	private Label submitFailedLabel;
-	
+
 	@FXML
     private TextField lastName;
 
@@ -52,9 +52,9 @@ public class AddController implements Initializable {
 
     @FXML
     private TextField degree;
-    
+
 	private static Scene scene;
-	
+
 	Stage oldStage;
 
 	@FXML
@@ -72,14 +72,14 @@ public class AddController implements Initializable {
 		newHomepage.setScene(new Scene(root));
 		newHomepage.show();
 	}
-	
-	
+
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 	}
-	
+
 	@FXML
 	void submitButtonClicked(ActionEvent event) throws IOException{
 		if(		firstName.getText() != "" && lastName.getText() != "" &&
@@ -87,8 +87,8 @@ public class AddController implements Initializable {
 				Integer.parseInt(yearsWorked.getText()) > 0) {
 			DBConnector connector = new DBConnector();
 			Connection conn = connector.connect();
-			connector.submit(conn, 10, Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
-			"", degree.getText(), false);
+			connector.submit(conn, firstName.getText(), lastName.getText(), Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
+			degree.getText(), status.getText());
 		} else {
 			submitFailedLabel.setText("Submit Failed!");
 		}
@@ -97,14 +97,14 @@ public class AddController implements Initializable {
 		// if years worked <0 throw error
 		// else allObjects = last, first, ....
 		// query string + allObject;
-		// insert query into 
+		// insert query into
 		/**
 		 * DBConnector connector = new DBConnector();
 		Connection conn = connector.connect();
 		ResultSet rs = connector.getProfileFromLogin(conn, usernameField.getText(), passwordField.getText());
 		 */
 	}
-	
-	
+
+
 
 }
