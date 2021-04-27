@@ -115,28 +115,29 @@ public class AddController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// From DBConnector class connects to the database
-				DBConnector dbconnector = new DBConnector();
-				Connection conn = dbconnector.connect();
-				ResultSet rs = dbconnector.getSubmissionsResultSet(conn, profileID);
+		DBConnector dbconnector = new DBConnector();
+		Connection conn = dbconnector.connect();
+		ResultSet rs = dbconnector.getSubmissionsResultSet(conn, profileID);
+		System.out.print(profileID);
 
-				// Set columns of the table
-				firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
-				lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
-				ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
-				collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
-				positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
-				yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
-				degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
-				statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
+		// Set columns of the table
+		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
+		lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
+		ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
+		collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
+		positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
+		yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
+		degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
 
-				ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
+		ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
 
-				// Loads the data into table
-				tableView.setItems(professors);
+		// Loads the data into table
+		tableView.setItems(professors);
 	}
 
 	@FXML
-	void submitButtonClicked(ActionEvent event) throws IOException{
+	void submitButtonClicked(ActionEvent event) throws IOException {
 		if(profileID > -1) {
 			if(		firstName.getText() != "" && lastName.getText() != "" &&
 					(Double.parseDouble(rateProfScore.getText()) < 5.0 && Double.parseDouble(rateProfScore.getText()) > 0.0) &&

@@ -37,7 +37,7 @@ import javafx.scene.Node;
 
 public class Controller implements Initializable {
 	// Profile, set as -1 to start
-	public int profileID = -1;
+	int profileID = -1;
 
 	// SubmissionsButton
 	@FXML
