@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.example.Controller.ButtonCell;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,7 +81,7 @@ public class AddController implements Initializable {
 			e.printStackTrace();
 		}
 		Controller controller = fxmlLoader.getController();
-		controller.setProfile(this.profileID);
+		controller.setProfile(profileID);
 		Stage newHomepage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		newHomepage.setScene(new Scene(root));
 		newHomepage.show();
@@ -110,30 +114,45 @@ public class AddController implements Initializable {
     @FXML
     private TableColumn<Professor, String> statusColumn;
 
-    
+    @FXML
+    Label profileIDLabel;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// From DBConnector class connects to the database
+
+	}
+	
+	public void setTable(int profileID) {
+		
 		DBConnector dbconnector = new DBConnector();
 		Connection conn = dbconnector.connect();
-		ResultSet rs = dbconnector.getSubmissionsResultSet(conn, profileID);
-		System.out.print(profileID);
+		this.profileID = profileID;
+		ResultSet rs = dbconnector.getProfileFromID(conn, profileID);
+		try {
+			while (rs.next()) {
+				profileIDLabel.setText("Profile: " + rs.getString(2));
+			}
+		} catch (SQLException e) {
+			profileIDLabel.setText("Profile: Default User");
+		}
+		// From DBConnector class connects to the database
+				rs = dbconnector.getSubmissionsResultSet(conn, profileID);
+				System.out.print(profileID);
 
-		// Set columns of the table
-		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
-		lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
-		ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
-		collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
-		positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
-		yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
-		degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
-		statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
+				// Set columns of the table
+				firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
+				lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
+				ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
+				collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
+				positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
+				yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
+				degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
+				statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
 
-		ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
+				ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
 
-		// Loads the data into table
-		tableView.setItems(professors);
+				// Loads the data into table
+				tableView.setItems(professors);
 	}
 
 	@FXML
