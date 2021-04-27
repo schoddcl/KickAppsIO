@@ -87,7 +87,16 @@ public class AddController implements Initializable {
 				Integer.parseInt(yearsWorked.getText()) > 0) {
 			DBConnector connector = new DBConnector();
 			Connection conn = connector.connect();
-			connector.submit(conn, firstName.getText(), lastName.getText(), Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
+			Parent root = null;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+			try {
+				root = fxmlLoader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			Controller controller = fxmlLoader.getController();
+			profileID = controller.profileID;
+			connector.submit(conn, profileID, firstName.getText(), lastName.getText(), Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
 			degree.getText());
 		} else {
 			submitFailedLabel.setText("Submit Failed!");
