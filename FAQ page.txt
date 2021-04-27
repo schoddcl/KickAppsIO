@@ -9,4 +9,4 @@
 	- Log in to your account and find the Professor you wish to comment on.
 	Press the 'comments' button on the far right, type out the comment you
 	wish to add, and press the 'comment' button.
-4) You can filter and sort all of the professors by each category or search bar.
+4) You can filter and sort all of the professors by each category or search bar. 
