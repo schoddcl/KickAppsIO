@@ -120,14 +120,14 @@ public class AddController implements Initializable {
 				ResultSet rs = dbconnector.getSubmissionsResultSet(conn);
 
 				// Set columns of the table
-				firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstNameColumn"));
-				lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastNameColumn"));
-				ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("ratingColumn"));
-				collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("collegeColumn"));
-				positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("positionColumn"));
-				yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorkedColumn"));
-				degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degreeColumn"));
-				statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("statusColumn"));
+				firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
+				lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
+				ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
+				collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
+				positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
+				yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
+				degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
+				statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
 
 				ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
 
