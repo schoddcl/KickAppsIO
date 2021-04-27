@@ -16,17 +16,18 @@ public class Admin extends User {
 		return rs;
 	}
 	
-	public void confirmSubmission(int subID, int profID, int profileID, String firstName, 
-			String lastName, double rateProfScore, String college, String position, int yearsWorked, String degree) {
-		String query = "UPDATE tblAdmissions SET subType = 'true' where subID = " + subID;
+	public void confirmSubmission(int subID, int profileID, String firstName, 
+			String lastName, double rateProfScore, String college, String position, int yearsWorked, String degree, String stat, int adminID) {
+		String query = "UPDATE tblAdmissions SET stat = 'Confirmed' where subID = " + subID;
 		connect(query, false);
-		query = "INSERT INTO tblProfessors VALUES('" + profID + "," + profileID + "," + firstName + "," + lastName + "," + rateProfScore + ","
-				+ college + "," + position + "," + yearsWorked + "," + degree + "', 0)";
+		query = "INSERT INTO tblProfessors(profileID, firstName, lastName, rateProfScore, college, position, yearsWorked, degree) "
+				+ "VALUES('" + profileID + "','" + firstName + "','" + lastName + "'," + rateProfScore + ",'"
+				+ college + "','" + position + "'," + yearsWorked + ",'" + degree + "')";
 		connect(query, false);
 	}
 	
 	public void denySubmission(int subID) {
-		String query = "UPDATE tblAdmissions SET subType = 'false' where subID = " + subID;
+		String query = "UPDATE tblAdmissions SET stat = 'Denied' where subID = " + subID;
 		connect(query, false);
 	}
 }
