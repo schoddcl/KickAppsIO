@@ -23,50 +23,51 @@ class AdminTests {
 		ResultSet rs = a.accessSubmissions();
 		try {
 			while(rs.next()) {
-				result = rs.getString(2);
+				result = rs.getString(3);
 				break;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("college", result);
+		assertEquals("Lukas", result);
 	}
 	
 	@Test
 	void canCallConfirmSubmission() {
 		String result = "";
 		Admin a = new Admin("Luke", "Sarrazine");
-		a.confirmSubmission(4);
-		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 4", true);
+		a.confirmSubmission(6, 1, "Paul", "HiIm", 5.0, "KickApps University", "Dean", 200, "Ph. D", "pending", 0);
+		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 6", true);
 		try {
 			while(rs.next()) {
-				result = rs.getString(2);
+				result = rs.getString(10);
 				break;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("true", result);
+		assertEquals("Confirmed", result);
+		connectDatabase("DELETE FROM tblProfessors WHERE lastName = 'HiIm'", false);
 	}
 	
 	@Test
 	void canCallDenySubmission() {
 		String result = "";
 		Admin a = new Admin("Luke", "Sarrazine");
-		a.denySubmission(4);
-		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 4", true);
+		a.denySubmission(6);
+		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 6", true);
 		try {
 			while(rs.next()) {
-				result = rs.getString(2);
+				result = rs.getString(10);
 				break;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("false", result);
+		assertEquals("Denied", result);
 	}
 	
 	public ResultSet connectDatabase(String query, boolean isQuery) {
