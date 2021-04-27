@@ -117,7 +117,7 @@ public class AddController implements Initializable {
 		// From DBConnector class connects to the database
 				DBConnector dbconnector = new DBConnector();
 				Connection conn = dbconnector.connect();
-				ResultSet rs = dbconnector.getSubmissionsResultSet(conn);
+				ResultSet rs = dbconnector.getSubmissionsResultSet(conn, profileID);
 
 				// Set columns of the table
 				firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
