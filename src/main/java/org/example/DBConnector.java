@@ -88,6 +88,7 @@ public class DBConnector {
 
 	public void submit(Connection conn, int profileID, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
 			String degree) {
+		System.out.print(profileID);
 		String query = "INSERT INTO tblAdmissions (profileID, firstName, LastName, rateProfScore, college, position, yearsWorked, degree, status, adminID) "
 				+ String.format("VALUES(%d, '%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending', 0)", profileID, firstName, LastName, rateProfScore, college, position, yearsWorked, degree);
 		executeUpdate(query);
