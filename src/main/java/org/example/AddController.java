@@ -6,6 +6,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+import org.example.Controller.ButtonCell;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +21,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class AddController implements Initializable {
 	int profileID = -1;
@@ -72,12 +82,57 @@ public class AddController implements Initializable {
 		newHomepage.setScene(new Scene(root));
 		newHomepage.show();
 	}
+	
+	@FXML
+    private TableView<Professor> tableView;
 
+    @FXML
+    private TableColumn<Professor, String> lastNameColumn;
 
+    @FXML
+    private TableColumn<Professor, String> firstNameColumn;
+
+    @FXML
+    private TableColumn<Professor, String> ratingColumn;
+
+    @FXML
+    private TableColumn<Professor, String> collegeColumn;
+
+    @FXML
+    private TableColumn<Professor, String> positionColumn;
+
+    @FXML
+    private TableColumn<Professor, String> yearsWorkedColumn;
+
+    @FXML
+    private TableColumn<Professor, String> degreeColumn;
+
+    @FXML
+    private TableColumn<Professor, String> statusColumn;
+
+    
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		// From DBConnector class connects to the database
+				DBConnector dbconnector = new DBConnector();
+				Connection conn = dbconnector.connect();
+				ResultSet rs = dbconnector.getSubmissionsResultSet(conn);
 
+				// Set columns of the table
+				firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
+				lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
+				ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
+				collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
+				positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
+				yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
+				degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
+				statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
+
+				ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
+
+				// Loads the data into table
+				tableView.setItems(professors);
 	}
 
 	@FXML
