@@ -86,8 +86,8 @@ public class DBConnector {
 		executeUpdate(query);
 	}
 
-	public ResultSet getSubmissionsResultSet(Connection conn) {
-		return executeQuery("Select * From tblAdmissions");
+	public ResultSet getSubmissionsResultSet(Connection conn, int profileID) {
+		return executeQuery("Select * From tblAdmissions WHERE profileID = " + profileID);
 	}
 	
 	public void submit(Connection conn, int profileID, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,

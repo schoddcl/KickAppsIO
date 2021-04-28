@@ -37,7 +37,7 @@ import javafx.scene.Node;
 
 public class Controller implements Initializable {
 	// Profile, set as -1 to start
-	public int profileID = -1;
+	private int profileID = -1;
 
 	// SubmissionsButton
 	@FXML
@@ -108,12 +108,10 @@ public class Controller implements Initializable {
 		// Changes the page to an add page
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add.fxml"));
 		Parent root = fxmlLoader.load();
-
 		AddController addController = fxmlLoader.getController();
-		addController.profileID = this.profileID;
-
+		addController.profileIDLabel.setText("Profile: Default User");
+		addController.setTable(profileID);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
@@ -139,7 +137,6 @@ public class Controller implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	// Table
