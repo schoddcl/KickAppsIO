@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 public class Moderator extends User {
 
-	public Moderator(String username, String password) {
-		super(username, password);
+	public Moderator(String username, String password, String permission) {
+		super(username, password, permission);
 	}
 
 	public void deleteComment(String comment, int profID) {

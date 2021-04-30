@@ -65,7 +65,7 @@ public class DBConnector {
 	}
 
 	public ResultSet getProfComments(Connection conn, int profID) {
-		return executeQuery("Select comment from tblComments where profID = " + profID);
+		return executeQuery("SELECT * from tblComments where profID = " + profID);
 	}
 
 	public ResultSet getProfileFromLogin(Connection conn, String usernameField, String passwordField) {
@@ -86,15 +86,10 @@ public class DBConnector {
 		executeUpdate(query);
 	}
 
-	public ResultSet getSubmissionsResultSet(Connection conn, int profileID) {
-		return executeQuery("Select * From tblAdmissions WHERE profileID = " + profileID);
-	}
-	
-	public void submit(Connection conn, int profileID, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
+	public void submit(Connection conn, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
 			String degree) {
-		System.out.print(profileID);
-		String query = "INSERT INTO tblAdmissions (firstName, LastName, rateProfScore, college, position, yearsWorked, degree, stat, adminID, profileID) "
-				+ String.format("VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending', 0, %d)", firstName, LastName, rateProfScore, college, position, yearsWorked, degree, profileID);
+		String query = "INSERT INTO tblAdmissions (firstName, LastName, rateProfScore, college, position, yearsWorked, degree, status, adminID) "
+				+ String.format("VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending', 0)", firstName, LastName, rateProfScore, college, position, yearsWorked, degree);
 		executeUpdate(query);
 	}
 
@@ -134,7 +129,15 @@ public class DBConnector {
 		return professors;
 	}
 	
-	public ResultSet getAllSubmissionsResultSet(Connection conn) {
-		return executeQuery("Select * From tblAdmissions WHERE stat = 'pending'");
+	public ObservableList<Comment> getProfessorsCommentsList(ResultSet rs) {
+		ObservableList<Comment> comments = FXCollections.observableArrayList();
+		try {
+			while(rs.next()) {
+				comments.add(new Comment(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4)));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return comments;
 	}
 }

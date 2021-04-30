@@ -12,11 +12,13 @@ public class Profile {
 
 	private String username;
 	private String password;
+	private String permission;
 
 	
-	public Profile(String username, String password) {
+	public Profile(String username, String password, String permission) {
 		setUsername(username);
 		setPassword(password);
+		setPermission(permission);
 	}
 	
 	public ResultSet connect(String query, boolean isQuery) {
@@ -62,5 +64,13 @@ public class Profile {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getPermission() {
+		return password;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
 }

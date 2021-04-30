@@ -12,8 +12,8 @@ import java.util.ResourceBundle;
 
 public class User extends Profile {
 
-	public User(String username, String password) {
-		super(username, password);
+	public User(String username, String password, String permission) {
+		super(username, password, permission);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -33,7 +33,7 @@ public class User extends Profile {
 	}
 
 	public void updateComments(String comment, int profID) {
-		String query = "UPDATE tblComments SET comment = comment + '\n" + comment + "' where profID = " + profID;
+		String query = "UPDATE tblComments SET comment = comment  '" + comment + "' WHERE profID = '" + profID+"'";
 		connect(query, false);
 		//separate Strings by new line at the beginning of each entry
 	}
