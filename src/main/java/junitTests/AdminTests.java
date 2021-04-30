@@ -19,7 +19,7 @@ class AdminTests {
 	@Test
 	void canCallAccessSubmissions() {
 		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine");
+		Admin a = new Admin("Luke", "Sarrazine", "Admin");
 		ResultSet rs = a.accessSubmissions();
 		try {
 			while(rs.next()) {
@@ -36,7 +36,7 @@ class AdminTests {
 	@Test
 	void canCallConfirmSubmission() {
 		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine");
+		Admin a = new Admin("Luke", "Sarrazine", "Admin");
 		a.confirmSubmission(6, 1, "Paul", "HiIm", 5.0, "KickApps University", "Dean", 200, "Ph. D", "pending", 0);
 		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 6", true);
 		try {
@@ -55,7 +55,7 @@ class AdminTests {
 	@Test
 	void canCallDenySubmission() {
 		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine");
+		Admin a = new Admin("Luke", "Sarrazine", "Admin");
 		a.denySubmission(6);
 		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 6", true);
 		try {
