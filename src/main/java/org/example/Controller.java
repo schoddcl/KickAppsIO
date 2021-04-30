@@ -48,8 +48,12 @@ public class Controller implements Initializable {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("submissions.fxml"));
 		Parent root = fxmlLoader.load();
 
-		SubmissionsController submissionsController = fxmlLoader.getController();
-		SubmissionsController.profileID = this.profileID;
+		SubmissionsController SubmissionsController = fxmlLoader.getController();
+		SubmissionsController.profileIDLabel.setText("Profile: Default User");
+		SubmissionsController.setTable(profileID);
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(new Scene(root));
+		stage.show();
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
