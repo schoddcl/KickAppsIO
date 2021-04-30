@@ -133,4 +133,8 @@ public class DBConnector {
 		}
 		return professors;
 	}
+	
+	public ResultSet getAllSubmissionsResultSet(Connection conn) {
+		return executeQuery("Select * From tblAdmissions WHERE stat = 'pending'");
+	}
 }
