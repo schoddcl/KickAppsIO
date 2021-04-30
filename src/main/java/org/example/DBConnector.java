@@ -85,12 +85,17 @@ public class DBConnector {
 				+ college + "," + position + "," + yearsWorked + "," + degree + "', 0)";
 		executeUpdate(query);
 	}
-
-	public void submit(Connection conn, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
+	
+	public void submit(Connection conn, int profileID, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
 			String degree) {
-		String query = "INSERT INTO tblAdmissions (firstName, LastName, rateProfScore, college, position, yearsWorked, degree, status, adminID) "
-				+ String.format("VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending', 0)", firstName, LastName, rateProfScore, college, position, yearsWorked, degree);
+		System.out.print(profileID);
+		String query = "INSERT INTO tblAdmissions (firstName, LastName, rateProfScore, college, position, yearsWorked, degree, stat, adminID, profileID) "
+				+ String.format("VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending', 0, %d)", firstName, LastName, rateProfScore, college, position, yearsWorked, degree, profileID);
 		executeUpdate(query);
+	}
+	
+	public ResultSet getSubmissionsResultSet(Connection conn, int profileID) {
+		return executeQuery("Select * From tblAdmissions WHERE profileID = " + profileID);
 	}
 
 	public ObservableList<Professor> getSubmissionsObservableList(ResultSet rs) {
