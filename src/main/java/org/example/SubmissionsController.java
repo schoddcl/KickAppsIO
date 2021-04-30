@@ -64,7 +64,10 @@ public class SubmissionsController implements Initializable {
     private TableColumn<Professor, String> degree;
 
     @FXML
-    private TableColumn<Professor, String> status;
+    private TableColumn<Professor, String> confirm;
+
+    @FXML
+    private TableColumn<Professor, String> deny;
 
     @FXML
     void backButtonClicked(ActionEvent event) {
@@ -87,18 +90,51 @@ public class SubmissionsController implements Initializable {
 
 	}
 
- // When comments button clicked
+    // When comments button clicked
  	void confirmClicked(ActionEvent event, Professor prof) throws IOException {
  		//adds or denies the submission
  		DBConnector connector = new DBConnector();
 		Connection conn = connector.connect();
  	}
 
- // Comments button code
- 	public class ButtonCell extends TableCell<Professor, String> {
- 		final Button cellButton = new Button("Comments");
+ // When comments button clicked
+  	void denyClicked(ActionEvent event, Professor prof) throws IOException {
+  		//adds or denies the submission
+  		DBConnector connector = new DBConnector();
+ 		Connection conn = connector.connect();
+  	}
 
- 		ButtonCell() {
+ // Comments button code
+ 	public class DenyButtonCell extends TableCell<Professor, String> {
+ 		final Button cellButton = new Button("Deny");
+
+ 		DenyButtonCell() {
+ 			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+ 				@Override
+ 				public void handle(ActionEvent t) {
+ 					try {
+ 						denyClicked(t, getTableRow().getItem());
+ 					} catch (IOException e) {
+ 						e.printStackTrace();
+ 					}
+ 				}
+ 			});
+ 		}
+
+ 		// Display button if the row is not empty
+ 		protected void updateItem(String t, boolean empty) {
+ 			super.updateItem(t, empty);
+ 			if (!empty) {
+ 				setGraphic(cellButton);
+ 			}
+ 		}
+ 	}
+
+ 	public class ConfirmButtonCell extends TableCell<Professor, String> {
+ 		final Button cellButton = new Button("Confirm");
+
+ 		ConfirmButtonCell() {
  			cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
  				@Override
@@ -147,7 +183,7 @@ public class SubmissionsController implements Initializable {
 				yearsWorked.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
 				degree.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
 
-				status.setCellValueFactory(
+				confirm.setCellValueFactory(
 						new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
 
 							@Override
@@ -156,12 +192,31 @@ public class SubmissionsController implements Initializable {
 							}
 						});
 
-				status.setCellFactory(new Callback<TableColumn<Professor, String>, TableCell<Professor, String>>() {
+				confirm.setCellFactory(new Callback<TableColumn<Professor, String>, TableCell<Professor, String>>() {
 
 					@Override
 					public TableCell<Professor, String> call(TableColumn<Professor, String> p) {
 						// Custom cell with comments feature
-						return new ButtonCell();
+						return new ConfirmButtonCell();
+					}
+
+				});
+
+				deny.setCellValueFactory(
+						new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
+
+							@Override
+							public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> p) {
+								return new SimpleStringProperty(p.getValue() != null, null);
+							}
+						});
+
+				deny.setCellFactory(new Callback<TableColumn<Professor, String>, TableCell<Professor, String>>() {
+
+					@Override
+					public TableCell<Professor, String> call(TableColumn<Professor, String> p) {
+						// Custom cell with comments feature
+						return new DenyButtonCell();
 					}
 
 				});
