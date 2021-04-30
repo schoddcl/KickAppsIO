@@ -128,7 +128,7 @@ public class DBConnector {
 		}
 		return professors;
 	}
-	
+
 	public ObservableList<Comment> getProfessorsCommentsList(ResultSet rs) {
 		ObservableList<Comment> comments = FXCollections.observableArrayList();
 		try {
@@ -139,5 +139,9 @@ public class DBConnector {
 			e.printStackTrace();
 		}
 		return comments;
+	}
+
+	public ResultSet getAllSubmissionsResultSet(Connection conn) {
+		return executeQuery("Select * From tblAdmissions WHERE stat = 'pending'");
 	}
 }
