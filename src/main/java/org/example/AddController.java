@@ -159,7 +159,7 @@ public class AddController implements Initializable {
 	void submitButtonClicked(ActionEvent event) throws IOException {
 		if(profileID > -1) {
 			if(		firstName.getText() != "" && lastName.getText() != "" &&
-					(Double.parseDouble(rateProfScore.getText()) < 5.0 && Double.parseDouble(rateProfScore.getText()) > 0.0) &&
+					(Double.parseDouble(rateProfScore.getText()) <= 5.0 && Double.parseDouble(rateProfScore.getText()) > 0.0) &&
 					Integer.parseInt(yearsWorked.getText()) > 0) {
 				DBConnector connector = new DBConnector();
 				Connection conn = connector.connect();
