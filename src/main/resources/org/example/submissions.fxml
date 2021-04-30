@@ -18,21 +18,21 @@
       </ToolBar>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableView" prefHeight="360.0" prefWidth="697.0">
+              <columns>
+                <TableColumn fx:id="lastName" prefWidth="75.0" text="Last Name" />
+                <TableColumn fx:id="firstName" prefWidth="75.0" text="First Name" />
+                  <TableColumn fx:id="rating" prefWidth="59.94215393066406" text="Rating" />
+                  <TableColumn fx:id="college" prefWidth="79.87774658203125" text="College" />
+                  <TableColumn fx:id="position" prefWidth="86.1221923828125" text="Position" />
+                  <TableColumn fx:id="yearsWorked" prefWidth="91.66885375976562" text="Years Worked" />
+                  <TableColumn fx:id="degree" prefWidth="77.0" text="Degree" />
+                  <TableColumn fx:id="confirm" prefWidth="75.0" text="Confirm" />
+                  <TableColumn fx:id="deny" prefWidth="75.0" text="Deny" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
    </center>
-   <bottom>
-      <TableView fx:id="tableView" prefHeight="360.0" prefWidth="741.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="lastName" prefWidth="75.0" text="Last Name" />
-          <TableColumn fx:id="firstName" prefWidth="75.0" text="First Name" />
-            <TableColumn fx:id="rating" prefWidth="59.94215393066406" text="Rating" />
-            <TableColumn fx:id="college" prefWidth="79.87774658203125" text="College" />
-            <TableColumn fx:id="position" prefWidth="86.1221923828125" text="Position" />
-            <TableColumn fx:id="yearsWorked" prefWidth="91.66885375976562" text="Years Worked" />
-            <TableColumn fx:id="degree" prefWidth="77.0" text="Degree" />
-            <TableColumn fx:id="confirm" prefWidth="75.0" text="Confirm" />
-            <TableColumn fx:id="deny" prefWidth="75.0" text="Deny" />
-        </columns>
-      </TableView>
-   </bottom>
 </BorderPane>
