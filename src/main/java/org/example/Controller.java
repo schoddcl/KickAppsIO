@@ -54,11 +54,6 @@ public class Controller implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(new Scene(root));
 		stage.show();
-
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		stage.setScene(new Scene(root));
-		stage.show();
 	}
 
 	// Login Button

@@ -37,7 +37,7 @@ public class SubmissionsController implements Initializable {
     private Button backButton;
 
     @FXML
-    private Label profileIDLabel;
+    public Label profileIDLabel;
 
     @FXML
     private TableView<Professor> tableView;
