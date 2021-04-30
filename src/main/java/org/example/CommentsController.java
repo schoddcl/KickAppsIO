@@ -19,6 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class CommentsController implements Initializable {
@@ -31,10 +34,19 @@ public class CommentsController implements Initializable {
 	private ContextMenu deleteComment;
 	
 	@FXML
-	private Button backButton;
-
+	private TextArea commentID;
+	
 	@FXML
-	private TableColumn<?, ?> professorName;
+	private Button backButton;
+	
+	@FXML
+	private Button commentButton;
+	
+	@FXML
+	private TableView<Comment> tableView;
+	
+	@FXML
+	private TableColumn<Comment, String> professorName;
 
 	private static Scene scene;
 
@@ -53,7 +65,22 @@ public class CommentsController implements Initializable {
 		newHomepage.setScene(new Scene(root));
 		newHomepage.show();
 	}
-
+	
+	@FXML
+	void commentButtonClicked(ActionEvent event) {
+		try {
+			DBConnector connector = new DBConnector();
+			Connection conn = connector.connect();
+			String query = "INSERT INTO tblComments (profileID, profID, comment) VALUES(" + profileID + "," + prof.getProfID() + 
+						",'"+ commentID.getText() + "')";
+			connector.executeUpdate(query);
+		}catch (Exception e) {
+				e.printStackTrace();
+		}
+		setProfComments(this.prof);
+		commentID.clear();
+	}
+	
 	static void setRoot(String fxml) throws IOException {
 		scene.setRoot(loadFXML(fxml));
 	}
@@ -61,6 +88,7 @@ public class CommentsController implements Initializable {
 	private static Parent loadFXML(String fxml) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 		return fxmlLoader.load();
+		
 	}
 
 	@Override
@@ -70,10 +98,15 @@ public class CommentsController implements Initializable {
 		}
 	}
 
-	public void setProfComments(Professor prof) {
+	public void setProfComments(Professor passProf) {
 		DBConnector connection = new DBConnector();
-		ResultSet commentsForProf = connection.getProfComments(connection.connect(), prof.getProfID());
+		prof = passProf;
+		ResultSet commentsForProf = connection.getProfComments(connection.connect(), passProf.getProfID());
+		ResultSet query = connection.getProfessorResultSet(connection.connect());
 		professorName.setText(prof.getLastName() + ", " + prof.getFirstName());
+		ObservableList<Comment> comments = connection.getProfessorsCommentsList(commentsForProf);
+		professorName.setCellValueFactory(new PropertyValueFactory<Comment, String>("comment"));
+		tableView.setItems(comments);
 	}
 	
 	public void setProfile(int profileID) {
