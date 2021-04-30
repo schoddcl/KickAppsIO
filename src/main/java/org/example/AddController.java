@@ -165,6 +165,7 @@ public class AddController implements Initializable {
 				Connection conn = connector.connect();
 				connector.submit(conn, profileID, firstName.getText(), lastName.getText(), Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
 				degree.getText());
+				setTable(profileID);
 			} else {
 				submitFailedLabel.setText("Submit Failed!");
 			}
