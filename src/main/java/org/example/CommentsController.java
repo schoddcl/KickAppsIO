@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,6 +33,9 @@ public class CommentsController implements Initializable {
 
 	@FXML
 	private ContextMenu deleteComment;
+	
+	@FXML
+	private Label commentFailedLabel;
 	
 	@FXML
 	private TextArea commentID;
@@ -71,9 +75,14 @@ public class CommentsController implements Initializable {
 		try {
 			DBConnector connector = new DBConnector();
 			Connection conn = connector.connect();
-			String query = "INSERT INTO tblComments (profileID, profID, comment) VALUES(" + profileID + "," + prof.getProfID() + 
+			System.out.println(profileID);
+			if(profileID > 0) {
+				String query = "INSERT INTO tblComments (profileID, profID, comment) VALUES(" + profileID + "," + prof.getProfID() + 
 						",'"+ commentID.getText() + "')";
-			connector.executeUpdate(query);
+				connector.executeUpdate(query);
+			}
+			else
+				commentFailedLabel.setText("Must Login to Submit a Comment");
 		}catch (Exception e) {
 				e.printStackTrace();
 		}
