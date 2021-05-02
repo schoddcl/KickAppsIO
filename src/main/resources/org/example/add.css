@@ -1,0 +1,91 @@
+.tool-bar {
+	-fx-background-image: url("minecrafttrees.jpg");
+	-fx-background-position: center bottom;
+	-fx-background-attachment: fixed;
+}
+.table-view {
+	-fx-background-image: url("lavendermc.jpg");
+	-fx-background-position: center bottom;
+	-fx-background-size: cover;
+	-fx-background-attachment: fixed;
+	-fx-text-fill: black;
+}
+
+
+.table-row-cell {
+	-fx-background-color: rgba(191.0,191.0,191.0,0.0);
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	
+}
+.root {
+	-fx-background-color:#7A9754;
+}
+.column-header {
+	-fx-background-color:white;	
+	-fx-text-fill: black;
+}
+#firstNameLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#newSubmissionLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#lastNameLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#ratingLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#collegeLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#yearsWorkedLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#degreeLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#positionLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#pastSubmissionsLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+#profileIDLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+
+}
+.button {
+	-fx-background-color:white;
+	-fx-font-weight: bold;
+}
