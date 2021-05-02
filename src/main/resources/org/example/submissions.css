@@ -22,14 +22,9 @@
 	-fx-background-color: rgba(250.0,250.0,250.0,0.3);
 
 }
-.column-header {
+.column-header { 
 	-fx-background-color:white;	
 	-fx-text-fill: black;
-}
-#searchLabel {
-	-fx-font-size: 10pt;
-	-fx-font-weight: bold;
-	-fx-text-fill: white;
 }
 #firstName {
 	-fx-text-fill: white;
@@ -51,25 +46,26 @@
 		
 }
 #yearsWorked {
+	-fx-font-size: 9.0pt;
 	-fx-text-fill: white;
 }
-#comments {
-	-fx-font-size: 8.0pt;
+#confirm {
+	-fx-font-size: 9.0pt;
 	-fx-alignment: CENTER;
 		 
 }
-
+#deny {
+	-fx-font-size: 9.0pt;
+	-fx-alignment: CENTER;
+		 
+}
 .button {
 	-fx-background-color:white;
 	-fx-font-weight: bold;
+	-fx-font-size: 8pt;
 }
-#searchLabel {
-	-fx-font-size: 10pt;
+#profileIDLabel {
+		-fx-font-size: 10pt;
 	-fx-font-weight: bold;
 	-fx-text-fill: white;
-}
-#profileLabel {
-	-fx-font-size: 10pt;
-	-fx-font-weight: bold;
-	-fx-text-fill: black;
 }

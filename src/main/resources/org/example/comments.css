@@ -18,6 +18,10 @@
 	-fx-font-weight: bold;
 	
 }
+.table-row-cell:odd{
+	-fx-background-color: rgba(250.0,250.0,250.0,0.3);
+
+}
 .column-header {
 	-fx-background-color:white;	
 }
