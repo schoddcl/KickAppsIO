@@ -18,6 +18,7 @@
 	-fx-font-weight: bold;
 	
 }
+
 .root {
 	-fx-background-color:#7A9754;
 }
@@ -85,6 +86,49 @@
 	-fx-text-fill: white;
 
 }
+#lastNameColumn {
+		-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+#firstNameColumn {
+	
+-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+#ratingColumn {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+#positionColumn {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+#collegeColumn {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+#degreeColumn {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+#yearsWorkedColumn {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+#statusColumn {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+
 .button {
 	-fx-background-color:white;
 	-fx-font-weight: bold;

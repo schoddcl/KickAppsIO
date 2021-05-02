@@ -33,22 +33,22 @@ public class CommentsController implements Initializable {
 
 	@FXML
 	private ContextMenu deleteComment;
-	
+
 	@FXML
 	private Label commentFailedLabel;
-	
+
 	@FXML
 	private TextArea commentID;
-	
+
 	@FXML
 	private Button backButton;
-	
+
 	@FXML
 	private Button commentButton;
-	
+
 	@FXML
 	private TableView<Comment> tableView;
-	
+
 	@FXML
 	private TableColumn<Comment, String> professorName;
 
@@ -69,26 +69,25 @@ public class CommentsController implements Initializable {
 		newHomepage.setScene(new Scene(root));
 		newHomepage.show();
 	}
-	
+
 	@FXML
 	void commentButtonClicked(ActionEvent event) {
 		try {
 			DBConnector connector = new DBConnector();
 			Connection conn = connector.connect();
-			if(profileID > 0) {
-				String query = "INSERT INTO tblComments (profileID, profID, comment) VALUES(" + profileID + "," + prof.getProfID() + 
-						",'"+ commentID.getText() + "')";
+			if (profileID > 0) {
+				String query = "INSERT INTO tblComments (profileID, profID, comment) VALUES(" + profileID + ","
+						+ prof.getProfID() + ",'" + commentID.getText() + "')";
 				connector.executeUpdate(query);
-			}
-			else
+			} else
 				commentFailedLabel.setText("Must Login to Submit a Comment");
-		}catch (Exception e) {
-				e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		setProfComments(this.prof);
 		commentID.clear();
 	}
-	
+
 	static void setRoot(String fxml) throws IOException {
 		scene.setRoot(loadFXML(fxml));
 	}
@@ -96,13 +95,13 @@ public class CommentsController implements Initializable {
 	private static Parent loadFXML(String fxml) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 		return fxmlLoader.load();
-		
+
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (profileID != -1) {
-		deleteComment.getItems().add(new MenuItem("" + profileID));
+			deleteComment.getItems().add(new MenuItem("" + profileID));
 		}
 	}
 
@@ -116,7 +115,7 @@ public class CommentsController implements Initializable {
 		professorName.setCellValueFactory(new PropertyValueFactory<Comment, String>("comment"));
 		tableView.setItems(comments);
 	}
-	
+
 	public void setProfile(int profileID) {
 		DBConnector connection = new DBConnector();
 		Connection conn = connection.connect();
@@ -129,6 +128,10 @@ public class CommentsController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	public void deleteCommentClicked() {
 
 	}
 }
