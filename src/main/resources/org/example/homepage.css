@@ -1,0 +1,56 @@
+.tool-bar {
+	-fx-background-image: url("minecrafttrees.jpg");
+	-fx-background-position: center bottom;
+	-fx-background-attachment: fixed;
+}
+.table-view {
+	-fx-background-image: url("lavendermc.jpg");
+	-fx-background-position: center bottom;
+	-fx-background-size: cover;
+	-fx-background-attachment: fixed;
+	-fx-text-fill: black;
+}
+
+
+.table-row-cell {
+	-fx-background-color: rgba(191.0,191.0,191.0,0.0);
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	
+}
+.column-header {
+	-fx-background-color:white;	
+}
+#searchLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+	
+}
+#firstName {
+	-fx-text-fill: white;
+}
+#lastName {
+	-fx-text-fill: white;
+}
+#rating {
+	-fx-text-fill: white;
+}
+#position {
+	-fx-text-fill: white;
+}
+#degree {
+	-fx-text-fill: white;
+}
+#college {
+	-fx-text-fill: white;
+		
+}
+#yearsWorked {
+	-fx-text-fill: white;
+}
+#comments {
+	-fx-font-size: 8.0pt;
+	-fx-alignment: CENTER;
+		
+}
