@@ -93,13 +93,14 @@ public class DBConnector {
 	public ObservableList<Professor> getSubmissionsObservableList(ResultSet rs) {
 		ObservableList<Professor> professors = FXCollections.observableArrayList();
 		try {
+			System.out.println(rs.toString());
 			while (rs.next()) {
 				if (rs.getString(9) == null) {
-					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), "", rs.getString(10), rs.getInt(2)));
+					professors.add(new Professor(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
+							rs.getString(6), rs.getString(7), rs.getInt(8), "", rs.getString(10), rs.getInt(1)));
 				} else {
-					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getInt(2)));
+					professors.add(new Professor(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
+							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getInt(1)));
 				}
 			}
 		} catch (SQLException e) {
@@ -113,10 +114,10 @@ public class DBConnector {
 		try {
 			while (rs.next()) {
 				if (rs.getString(9) == null) {
-					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
+					professors.add(new Professor(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
 							rs.getString(6), rs.getString(7), rs.getInt(8), ""));
 				} else {
-					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
+					professors.add(new Professor(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
 							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9)));
 				}
 			}
@@ -144,6 +145,7 @@ public class DBConnector {
 
 	public void confirmSubmission(Connection conn, Professor prof) {
 		String query = "UPDATE tblAdmissions SET stat = 'Confirmed' WHERE subID = " + prof.getSubID();
+		System.out.print(prof.getSubID());
 		executeUpdate(query);
 		query = String.format("INSERT INTO tblProfessors (firstName, LastName, rateProfScore, college, position, yearsWorked, degree) VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s')",
 				prof.getFirstName(), prof.getLastName(), prof.getRating(), prof.getCollege(), prof.getPosition(), prof.getYearsWorked(), prof.getDegree());
