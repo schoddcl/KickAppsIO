@@ -21,7 +21,7 @@
 .root {
 	-fx-background-color:#7A9754;
 }
-.column-header {
+.column-header { 
 	-fx-background-color:white;	
 	-fx-text-fill: black;
 }
