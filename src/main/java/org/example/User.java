@@ -25,15 +25,18 @@ public class User extends Profile {
 		
 	}
 
-	public void submit(int profID, double rateMyProfessorScore, String college, String position, int yearsWorked,
-			String classes, String degree, boolean update) {
-		String query = "INSERT INTO tblAdmissions VALUES('"  + college + "', 0)";
+	public void submit(int profileID, String firstName, String lastName, double rateMyProfessorScore, String college, String position, int yearsWorked,
+			String degree) {
+		String query = "INSERT INTO tblAdmissions(profileID, firstName, lastName, rateProfScore, college, position, yearsWorked, degree)"
+				+ " VALUES("+ profileID + ", '" + firstName+"', '"+ lastName+ "', " + rateMyProfessorScore+ ", '" + college + "', '" + position + "', "
+				+ yearsWorked + ", '" + degree + "')";
+		//System.out.println(query);
 		connect(query, false);
 		
 	}
 
 	public void updateComments(String comment, int profID) {
-		String query = "UPDATE tblComments SET comment = comment  '" + comment + "' WHERE profID = '" + profID+"'";
+		String query = "UPDATE tblComments SET comment = '" + comment + "' WHERE profID = '" + profID+"'";
 		connect(query, false);
 		//separate Strings by new line at the beginning of each entry
 	}

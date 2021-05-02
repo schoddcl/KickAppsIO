@@ -26,7 +26,7 @@ public class DBConnector {
 		return null;
 	}
 
-	public ResultSet executeQuery(String query) {
+	public ResultSet executeQuery(String query, boolean isQuery) {
 		ResultSet rs = null;
 		Connection conn = connect();
 		if (conn != null) {
@@ -34,12 +34,13 @@ public class DBConnector {
 				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
 				Statement select = conn.createStatement();
 				// Get the table of the professors
-				rs = select.executeQuery(query);
+				if(isQuery)
+					return rs = select.executeQuery(query);
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
 		}
-		return rs;
+		return null;
 	}
 
 	public ResultSet executeUpdate(String query) {
@@ -58,23 +59,23 @@ public class DBConnector {
 	}
 
 	public ResultSet getProfessorResultSet(Connection conn) {
-		return executeQuery("Select * From tblProfessors");
+		return executeQuery("Select * From tblProfessors", true);
 	}
 	public ResultSet getProfessorFromID(Connection conn, int profID) {
-		return executeQuery("Select * From tblProfessors where profID = " + profID);
+		return executeQuery("Select * From tblProfessors where profID = " + profID, true);
 	}
 
 	public ResultSet getProfComments(Connection conn, int profID) {
-		return executeQuery("SELECT * from tblComments where profID = " + profID);
+		return executeQuery("SELECT * from tblComments where profID = " + profID, true);
 	}
 
 	public ResultSet getProfileFromLogin(Connection conn, String usernameField, String passwordField) {
 		return executeQuery("select profileID from tblProfiles where username = '" + usernameField
-				+ "' and password = '" + passwordField + "'");
+				+ "' and password = '" + passwordField + "'", true);
 	}
 
 	public ResultSet getProfileFromID(Connection conn, int profileID) {
-		return executeQuery("Select * from tblProfiles where profileID = " + profileID);
+		return executeQuery("Select * from tblProfiles where profileID = " + profileID, true);
 	}
 
 	public void submit(Connection conn, int profileID, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
@@ -86,7 +87,7 @@ public class DBConnector {
 	}
 
 	public ResultSet getSubmissionsResultSet(Connection conn, int profileID) {
-		return executeQuery("Select * From tblAdmissions WHERE profileID = " + profileID);
+		return executeQuery("Select * From tblAdmissions WHERE profileID = " + profileID, true);
 	}
 
 	public ObservableList<Professor> getSubmissionsObservableList(ResultSet rs) {
@@ -138,7 +139,7 @@ public class DBConnector {
 	}
 
 	public ResultSet getAllSubmissionsResultSet(Connection conn) {
-		return executeQuery("Select * From tblAdmissions WHERE stat = 'pending'");
+		return executeQuery("Select * From tblAdmissions WHERE stat = 'pending'", true);
 	}
 
 	public void confirmSubmission(Connection conn, Professor prof) {
