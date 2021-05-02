@@ -21,7 +21,7 @@
          </items>
       </ToolBar>
    </top>
-   <center>
+   <center> 
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn fx:id="lastName" prefWidth="75.0" text="Last Name" />
