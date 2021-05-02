@@ -166,6 +166,7 @@ public class AddController implements Initializable {
 				Connection conn = connector.connect();
 				connector.submit(conn, profileID, firstName.getText(), lastName.getText(), Double.parseDouble(rateProfScore.getText()), college.getText(), position.getText(), Integer.parseInt(yearsWorked.getText()),
 				degree.getText());
+				resetInputToBlank();
 				setTable(profileID);
 			} else {
 				submitFailedLabel.setText("Submit Failed!");
@@ -173,5 +174,15 @@ public class AddController implements Initializable {
 		} else {
 			submitFailedLabel.setText("Please go back and login");
 		}
+	}
+
+	public void resetInputToBlank() {
+		lastName.setText("");
+		firstName.setText("");
+		rateProfScore.setText("");
+		college.setText("");
+		position.setText("");
+		yearsWorked.setText("");
+		degree.setText("");
 	}
 }
