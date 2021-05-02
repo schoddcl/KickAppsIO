@@ -75,7 +75,6 @@ public class CommentsController implements Initializable {
 		try {
 			DBConnector connector = new DBConnector();
 			Connection conn = connector.connect();
-			System.out.println(profileID);
 			if(profileID > 0) {
 				String query = "INSERT INTO tblComments (profileID, profID, comment) VALUES(" + profileID + "," + prof.getProfID() + 
 						",'"+ commentID.getText() + "')";
