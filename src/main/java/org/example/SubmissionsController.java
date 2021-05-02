@@ -228,7 +228,6 @@ public class SubmissionsController implements Initializable {
 
 				// Loads the data into table
 				tableView.setItems(professors);
+				return true;
 	}
-	return true;
-
 }
