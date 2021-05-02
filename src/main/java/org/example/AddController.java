@@ -86,7 +86,7 @@ public class AddController implements Initializable {
 		newHomepage.setScene(new Scene(root));
 		newHomepage.show();
 	}
-	
+
 	@FXML
     private TableView<Professor> tableView;
 
@@ -121,9 +121,9 @@ public class AddController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
-	
-	public void setTable(int profileID) {
-		
+
+	public boolean setTable(int profileID) {
+
 		DBConnector dbconnector = new DBConnector();
 		Connection conn = dbconnector.connect();
 		this.profileID = profileID;
@@ -153,6 +153,7 @@ public class AddController implements Initializable {
 
 				// Loads the data into table
 				tableView.setItems(professors);
+				return true;
 	}
 
 	@FXML

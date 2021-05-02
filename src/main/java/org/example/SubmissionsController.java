@@ -160,7 +160,7 @@ public class SubmissionsController implements Initializable {
  		}
  	}
 
-	public void setTable(int profileID) {
+	public boolean setTable(int profileID) {
 
 		DBConnector dbconnector = new DBConnector();
 		Connection conn = dbconnector.connect();
@@ -229,6 +229,6 @@ public class SubmissionsController implements Initializable {
 				// Loads the data into table
 				tableView.setItems(professors);
 	}
-
+	return true;
 
 }
