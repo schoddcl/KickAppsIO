@@ -38,23 +38,25 @@ import javafx.scene.Node;
 public class Controller implements Initializable {
 	// Profile, set as -1 to start
 	private int profileID = -1;
-
+	private String permission = "None";
+	
 	// SubmissionsButton
 	@FXML
 	private Button submissionsButton;
 	@FXML
 	void submissionsButtonClicked(ActionEvent event) throws IOException {
 		// Changes the page to an add page
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("submissions.fxml"));
-		Parent root = fxmlLoader.load();
-
-		SubmissionsController SubmissionsController = fxmlLoader.getController();
-		SubmissionsController.profileIDLabel.setText("Profile: Default User");
-		SubmissionsController.setTable(profileID);
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(new Scene(root));
-		stage.show();
-	}
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("submissions.fxml"));
+			Parent root = fxmlLoader.load();
+			SubmissionsController SubmissionsController = fxmlLoader.getController();
+			SubmissionsController.profileIDLabel.setText("Profile: Default User");
+			SubmissionsController.setTable(profileID);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
+			
+			
 
 	// Login Button
 	@FXML
@@ -126,12 +128,15 @@ public class Controller implements Initializable {
 		DBConnector connection = new DBConnector();
 		Connection conn = connection.connect();
 		ResultSet rs = connection.getProfileFromID(conn, profileID);
+		
 		try {
 			while (rs.next()) {
 				profileLabel.setText("Profile: " + rs.getString(2));
 				loginButton.setText("Logout");
-				submissionsButton.setVisible(true);
 				this.profileID = profileID;
+				this.permission = rs.getString(4);
+				if(permission.equals("Admin") || permission.equals("Moderator"))
+				submissionsButton.setVisible(true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
