@@ -1,0 +1,15 @@
+#loginLabel {
+	-fx-font-size: 20pt;
+	-fx-text-fill: white;
+}
+#loginPane {
+	-fx-background-image: url("houselavendermc.png");
+	-fx-background-size: cover;
+}
+.button {
+	-fx-background-color:white;
+	-fx-font-weight: bold;
+}
+.label {
+	-fx-text-fill: white;
+}

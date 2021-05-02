@@ -63,3 +63,8 @@
 	-fx-font-weight: bold;
 	-fx-text-fill: white;
 }
+#profileLabel {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: black;
+}

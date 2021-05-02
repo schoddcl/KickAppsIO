@@ -16,7 +16,7 @@
             <Button fx:id="addButton" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
             <Label fx:id="searchLabel" text="Search" />
             <TextField fx:id="searchField" />
-            <Label fx:id="profileLabel" prefHeight="17.0" prefWidth="300.0" />
+            <Label fx:id="profileLabel" prefHeight="17.0" prefWidth="290.0" visible="true" />
             <Button fx:id="submissionsButton" mnemonicParsing="false" onAction="#submissionsButtonClicked" text="Submissions" visible="false" />
          </items>
       </ToolBar>
