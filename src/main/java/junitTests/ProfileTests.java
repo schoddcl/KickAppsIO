@@ -10,12 +10,12 @@ class ProfileTests {
 
 	@Test
 	void canCreateProfileWithUsernameAndPassword() {
-		Profile p = new Profile("Luke", "password");
+		Profile p = new Profile("Luke", "password", "none");
 	}
 	
 	@Test
 	void canSetUsername() {
-		Profile p = new Profile("Luke", "password");
+		Profile p = new Profile("Luke", "password","none");
 		p.setUsername("John");
 		p.setPassword("word");
 		assertEquals("John", p.getUsername());
@@ -23,7 +23,7 @@ class ProfileTests {
 	
 	@Test
 	void canSetPassword() {
-		Profile p = new Profile("Luke", "notPassword");
+		Profile p = new Profile("Luke", "notPassword","none");
 		p.setPassword("password");
 		assertEquals("password", p.getPassword());
 	}

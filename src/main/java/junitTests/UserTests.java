@@ -18,8 +18,8 @@ class UserTests {
 	@Test
 	void canCallViewProfessors() {
 		String firstName = "";
-		User u = new User("Luke", "Sarrazine");
-		ResultSet rs = u.viewProfessors(1, "Matthew", "Stephan");
+		User u = new User("Luke", "Sarrazine", "none");
+		ResultSet rs = u.viewProfessors(2, "Matthew", "Stephan");
 		try {
 			while(rs.next()) {
 				firstName = rs.getString(3);
@@ -32,38 +32,38 @@ class UserTests {
 
 	@Test
 	void canCallSubmit() {
-		String result = "";
-		User u = new User("Luke", "Sarrazine");
-		u.submit(0, 5.0, "Miami University", "Professor", 2, "CSE201", "PHD", false);
-		ResultSet rs = connectDatabase("Select * from tblAdmissions where adminID = 0", true);
+		double result = 1;
+		User u = new User("Luke", "Sarrazine", "None");
+		u.submit(1 ,"Submit", "Test", 4.20, "Miami University", "TA", 1, "Something");
+		ResultSet rs = connectDatabase("Select * from tblAdmissions where firstName = 'Submit' AND lastName = 'Test'", true);
 		try {
 			while(rs.next()) {
-				result = rs.getString(2);
+				result = rs.getDouble(5);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		assertEquals("Miami University", result);
+		assertEquals(4.20, result);
+		connectDatabase("DELETE FROM tblAdmissions WHERE firstName = 'Submit' AND lastName = 'Test'", false);
 	}
 	
 	@Test
 	void canCallUpdateComments() {
 		String result = "";
-		User u = new User("Luke", "Sarrazine");
+		User u = new User("Luke", "Sarrazine", "none");
 		String query = "INSERT INTO tblComments VALUES(3, 0, 'comment')";
 		connectDatabase(query, false);
-		u.updateComments("testComment", 1);
+		u.updateComments("testComment", 0);
 		ResultSet rs = connectDatabase("Select * from tblComments where profID = 0", true);
 		try {
 			while(rs.next()) {
-				result = rs.getString(1);
+				result = rs.getString(4);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.print(result);
-		assertEquals("Miami University", result);
-		
+		assertEquals("testComment", result);
+		connectDatabase("DELETE FROM tblComments WHERE profID = 0", false);
 	}
 
 	public ResultSet connectDatabase(String query, boolean isQuery) {

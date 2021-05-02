@@ -18,9 +18,9 @@ class ModeratorTests {
 	@Test
 	void canCallUpdateComment() {
 		String result = "";
-		User u = new User("Luke", "Sarrazine");
+		User u = new User("Luke", "Sarrazine","none");
 		u.updateComments("\ncomment to delete", 0);
-		ResultSet rs = connectDatabase("Select * from tblComments where profID = 0", false);
+		ResultSet rs = connectDatabase("Select * from tblComments where profID = 0", true);
 		try {
 			while(rs.next()) {
 				result = rs.getString(3);
