@@ -145,7 +145,7 @@ public class DBConnector {
 	public void confirmSubmission(Connection conn, Professor prof) {
 		String query = "UPDATE tblAdmissions SET stat = 'Confirmed' WHERE subID = " + prof.getSubID();
 		executeUpdate(query);
-		query = String.format("INSERT INTO tblProfessors (firstName, LastName, rateProfScore, college, position, yearsWorked, degree) VALUES(%s, %s, %.2f, %s, %s, %d, %s)",
+		query = String.format("INSERT INTO tblProfessors (firstName, LastName, rateProfScore, college, position, yearsWorked, degree) VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s')",
 				prof.getFirstName(), prof.getLastName(), prof.getRating(), prof.getCollege(), prof.getPosition(), prof.getYearsWorked(), prof.getDegree());
 		executeUpdate(query);
 	}
