@@ -8,6 +8,7 @@ public class Professor {
 	private String firstName, lastName, college, position, degree, status;
 	private double rating;
 	private Integer yearsWorked, profID;
+	private Integer subID;
 
 	public Professor(Integer profID, String firstName, String lastName, Double rating, String college, String position,
 			Integer yearsWorked, String degree) {
@@ -20,10 +21,11 @@ public class Professor {
 		this.rating = rating;
 		this.yearsWorked = yearsWorked;
 		this.status = "pending";
+		this.subID = -1;
 	}
 
 	public Professor(Integer profID, String firstName, String lastName, Double rating, String college, String position,
-			Integer yearsWorked, String degree, String status) {
+			Integer yearsWorked, String degree, String status, int subID) {
 		this.profID = profID;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -33,6 +35,7 @@ public class Professor {
 		this.rating = rating;
 		this.yearsWorked = yearsWorked;
 		this.status = status;
+		this.subID = subID;
 	}
 
 	// Getter for Prof ID
@@ -73,6 +76,14 @@ public class Professor {
 		return status;
 	}
 
+	public Integer getSubID() {
+		return subID;
+	}
+
+	public void setSubID(int subID) {
+		this.subID = subID;
+	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -111,5 +122,4 @@ public class Professor {
 				"ProfessorID: %d | %s %s %.1f %s %s %d %s",
 				profID, firstName, lastName, rating, college, position, yearsWorked, degree);
 	}
-
 }

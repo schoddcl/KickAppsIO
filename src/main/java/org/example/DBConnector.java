@@ -77,15 +77,6 @@ public class DBConnector {
 		return executeQuery("Select * from tblProfiles where profileID = " + profileID);
 	}
 
-	public void confirmSubmission(Connection conn, int subID, int profID, int profileID, String firstName,
-		String lastName, double rateProfScore, String college, String position, int yearsWorked, String degree) {
-		String query = "UPDATE tblAdmissions SET subType = 'true' where subID = " + subID;
-		executeUpdate(query);
-		query = "INSERT INTO tblProfessors VALUES('" + profID + "," + profileID + "," + firstName + "," + lastName + "," + rateProfScore + ","
-				+ college + "," + position + "," + yearsWorked + "," + degree + "', 0)";
-		executeUpdate(query);
-	}
-	
 	public void submit(Connection conn, int profileID, String firstName, String LastName, double rateProfScore, String college, String position, int yearsWorked,
 			String degree) {
 		System.out.print(profileID);
@@ -93,7 +84,7 @@ public class DBConnector {
 				+ String.format("VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s', 'pending', 0, %d)", firstName, LastName, rateProfScore, college, position, yearsWorked, degree, profileID);
 		executeUpdate(query);
 	}
-	
+
 	public ResultSet getSubmissionsResultSet(Connection conn, int profileID) {
 		return executeQuery("Select * From tblAdmissions WHERE profileID = " + profileID);
 	}
@@ -104,10 +95,10 @@ public class DBConnector {
 			while (rs.next()) {
 				if (rs.getString(9) == null) {
 					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), "", rs.getString(10)));
+							rs.getString(6), rs.getString(7), rs.getInt(8), "", rs.getString(10), rs.getInt(2)));
 				} else {
 					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getString(10)));
+							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getInt(2)));
 				}
 			}
 		} catch (SQLException e) {
@@ -148,5 +139,12 @@ public class DBConnector {
 
 	public ResultSet getAllSubmissionsResultSet(Connection conn) {
 		return executeQuery("Select * From tblAdmissions WHERE stat = 'pending'");
+	}
+
+	public void confirmSubmission(Connection conn, Professor prof) {
+		String query = "UPDATE tblAdmissions SET stat = 'confirmed' WHERE subID = " + prof.getSubID();
+		executeUpdate(query);
+		query = "INSERT INTO tblProfessors ()VALUES()";
+		executeUpdate(query);
 	}
 }

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.example.Controller.ButtonCell;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -31,7 +30,7 @@ import javafx.util.Callback;
 
 public class SubmissionsController implements Initializable {
 
-	public static int profileID;
+	public int profileID = -1;
 
     @FXML
     private Button backButton;
@@ -95,6 +94,8 @@ public class SubmissionsController implements Initializable {
  		//adds or denies the submission
  		DBConnector connector = new DBConnector();
 		Connection conn = connector.connect();
+		connector.confirmSubmission(conn, prof);
+		setTable(profileID);
  	}
 
  // When comments button clicked
@@ -102,6 +103,8 @@ public class SubmissionsController implements Initializable {
   		//adds or denies the submission
   		DBConnector connector = new DBConnector();
  		Connection conn = connector.connect();
+		connector.denySubmission(conn, prof);
+		setTable(profileID);
   	}
 
  // Comments button code
