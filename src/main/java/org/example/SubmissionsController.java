@@ -95,6 +95,7 @@ public class SubmissionsController implements Initializable {
  		DBConnector connector = new DBConnector();
 		Connection conn = connector.connect();
 		connector.confirmSubmission(conn, prof);
+		setTable(profileID);
  	}
 
  // When comments button clicked
@@ -102,6 +103,8 @@ public class SubmissionsController implements Initializable {
   		//adds or denies the submission
   		DBConnector connector = new DBConnector();
  		Connection conn = connector.connect();
+		connector.denySubmission(conn, prof);
+		setTable(profileID);
   	}
 
  // Comments button code
