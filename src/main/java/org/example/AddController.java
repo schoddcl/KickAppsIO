@@ -123,12 +123,9 @@ public class AddController implements Initializable {
 	}
 
 	public boolean setTable(int profileID) {
-		
-		DBConnector dbconnector = new DBConnector();
-		Connection conn = dbconnector.connect();
-		updateProfileIDLabel(profileID, dbconnector, conn);
+		updateProfileIDLabel(profileID);
 		// From DBConnector class connects to the database
-		ObservableList<Professor> professors = getSubmissionsForUser(profileID, dbconnector, conn);
+		ObservableList<Professor> professors = getSubmissionsForUser(profileID);
 		
 		// Set columns of the table
 		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
@@ -145,13 +142,17 @@ public class AddController implements Initializable {
 		return true;
 	}
 
-	public ObservableList<Professor> getSubmissionsForUser(int profileID, DBConnector dbconnector, Connection conn) {
+	public ObservableList<Professor> getSubmissionsForUser(int profileID) {
+		DBConnector dbconnector = new DBConnector();
+		Connection conn = dbconnector.connect();
 		ResultSet rs = dbconnector.getSubmissionsResultSet(conn, profileID);
 		ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
 		return professors;
 	}
 
-	public void updateProfileIDLabel(int profileID, DBConnector dbconnector, Connection conn) {
+	public void updateProfileIDLabel(int profileID) {
+		DBConnector dbconnector = new DBConnector();
+		Connection conn = dbconnector.connect();
 		this.profileID = profileID;
 		ResultSet rs = dbconnector.getProfileFromID(conn, profileID);
 		try {

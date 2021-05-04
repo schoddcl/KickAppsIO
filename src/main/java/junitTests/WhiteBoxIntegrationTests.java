@@ -17,7 +17,7 @@ class WhiteBoxIntegrationTests {
 	@Test
 	void CanUpdateSubmissionsTableFromAddWindow() {
 		AddController addController = new AddController();
-		assertTrue(addController.setTable(3));
+		addController.getSubmissionsForUser(3, null, null)
 	}
 	
 	@Test
