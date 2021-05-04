@@ -48,6 +48,6 @@ class WhiteBoxIntegrationTests {
 		}
 		assertEquals("WhiteBoxTestFName", firstName);
 		assertEquals("WhiteBoxTestLName", lastName);
-		//assertTrue(connector.deleteProfessorByFirstAndLastName(testProf));
+		assertTrue(connector.deleteProfessorByFirstAndLastName(testProf));
 	}
 }
