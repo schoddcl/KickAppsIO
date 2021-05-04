@@ -10,7 +10,7 @@ import org.example.Admin;
 import org.example.SubmissionsController;
 import org.junit.jupiter.api.Test;
 
-class IntegrationTests {
+class WhiteBoxIntegrationTests {
 
 	@Test
 	void CanUpdateSubmissions() {
