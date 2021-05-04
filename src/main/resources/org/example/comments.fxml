@@ -25,7 +25,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <contextMenu>
-            <ContextMenu fx:id="deleteComment">
+            <ContextMenu fx:id="deleteComment" onAction="#deleteCommentClicked">
               <items>
               </items>
             </ContextMenu>
