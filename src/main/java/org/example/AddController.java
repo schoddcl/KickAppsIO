@@ -123,9 +123,35 @@ public class AddController implements Initializable {
 	}
 
 	public boolean setTable(int profileID) {
-
+		
 		DBConnector dbconnector = new DBConnector();
 		Connection conn = dbconnector.connect();
+		updateProfileIDLabel(profileID, dbconnector, conn);
+		// From DBConnector class connects to the database
+		ObservableList<Professor> professors = getSubmissionsForUser(profileID, dbconnector, conn);
+		
+		// Set columns of the table
+		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
+		lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
+		ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
+		collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
+		positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
+		yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
+		degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
+
+		// Loads the data into table
+		tableView.setItems(professors);
+		return true;
+	}
+
+	public ObservableList<Professor> getSubmissionsForUser(int profileID, DBConnector dbconnector, Connection conn) {
+		ResultSet rs = dbconnector.getSubmissionsResultSet(conn, profileID);
+		ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
+		return professors;
+	}
+
+	public void updateProfileIDLabel(int profileID, DBConnector dbconnector, Connection conn) {
 		this.profileID = profileID;
 		ResultSet rs = dbconnector.getProfileFromID(conn, profileID);
 		try {
@@ -135,25 +161,6 @@ public class AddController implements Initializable {
 		} catch (SQLException e) {
 			profileIDLabel.setText("Profile: Default User");
 		}
-		// From DBConnector class connects to the database
-				rs = dbconnector.getSubmissionsResultSet(conn, profileID);
-				System.out.print(profileID);
-
-				// Set columns of the table
-				firstNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
-				lastNameColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
-				ratingColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
-				collegeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
-				positionColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
-				yearsWorkedColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
-				degreeColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
-				statusColumn.setCellValueFactory(new PropertyValueFactory<Professor, String>("status"));
-
-				ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
-
-				// Loads the data into table
-				tableView.setItems(professors);
-				return true;
 	}
 
 	@FXML
