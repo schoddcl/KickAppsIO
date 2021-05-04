@@ -133,7 +133,7 @@ public class DBConnector {
 			while(rs.next()) {
 				comments.add(new Comment(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4)));
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return comments;
