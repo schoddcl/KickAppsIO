@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import org.example.AddController;
 import org.example.DBConnector;
 import org.example.Professor;
+import org.example.Profile;
 import org.example.SubmissionsController;
 import org.junit.jupiter.api.Test;
 
@@ -27,10 +28,21 @@ class IntegrationTests {
  		ResultSet rs = submissionsController.getAllPendingSubmissions();
  		assertTrue(connector.getProfessorsObservableList(rs) instanceof ObservableList<?>);
 	}
-	
+
 	@Test
-	void CanUpdateSubmissionsTableFromAdminSubmissionsWindow() {
-		SubmissionsController submissionsController = new SubmissionsController();
-		assertTrue(submissionsController.setTable(3));
+	void CanDeleteProfessorFromDatabase() {
+		Professor testProf = new Professor(-1, "WhiteBoxTestFName", "WhiteBoxTestLName", 1.0, "WhiteBoxTest", "WhiteBoxTest", 1, "WhiteBoxTest");
+		DBConnector connector = new DBConnector();
+ 		Connection conn = connector.connect();
+		connector.deleteProfessorByFirstAndLastName(testProf);
+		assertTrue(connector.deleteProfessorByFirstAndLastName(testProf));
+	}
+
+	@Test
+	void CanGetSubmissionsForAGivenProfile() {
+		Profile tester = new Profile("sarrazlt", "cse201", "admin", 3);
+		DBConnector connector = new DBConnector();
+ 		Connection conn = connector.connect();
+		assertTrue(connector.getSubmissionsResultSet(conn, tester.getProfileID()) instanceof ResultSet);
 	}
 }

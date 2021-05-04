@@ -13,14 +13,23 @@ public class Profile {
 	private String username;
 	private String password;
 	private String permission;
+	public int profileID;
 
-	
+
 	public Profile(String username, String password, String permission) {
 		setUsername(username);
 		setPassword(password);
 		setPermission(permission);
+		setProfileID(-1);
 	}
-	
+
+	public Profile(String username, String password, String permission, int profileID) {
+		setUsername(username);
+		setPassword(password);
+		setPermission(permission);
+		setProfileID(profileID);
+	}
+
 	public ResultSet connect(String query, boolean isQuery) {
 		// Connect to database
 		ResultSet rs = null;
@@ -32,9 +41,9 @@ public class Profile {
 			Connection conn = DriverManager.getConnection(dbURL, user, pass);
 			if (conn != null) {
 				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
-				
+
 				Statement statement = conn.createStatement();
-				
+
 				if(isQuery) {
 					// Get the table of the professors
 					rs = statement.executeQuery(query);
@@ -65,12 +74,20 @@ public class Profile {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getPermission() {
 		return password;
 	}
 
 	public void setPermission(String permission) {
 		this.permission = permission;
+	}
+
+	public int getProfileID() {
+		return profileID;
+	}
+
+	public void setProfileID(int profileID) {
+		this.profileID = profileID;
 	}
 }
