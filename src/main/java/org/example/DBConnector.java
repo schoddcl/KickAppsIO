@@ -157,10 +157,10 @@ public class DBConnector {
 		return true;
 	}
 	
-	public boolean deleteProfessor(Professor prof) {
+	public boolean deleteProfessorByFirstAndLastName(Professor prof) {
 		String query;
-		query = String.format("DELETE FROM tblProfessors (firstName, LastName, rateProfScore, college, position, yearsWorked, degree) VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s')",
-				prof.getFirstName(), prof.getLastName(), prof.getRating(), prof.getCollege(), prof.getPosition(), prof.getYearsWorked(), prof.getDegree());
+		query = String.format("DELETE FROM tblProfessors WHERE firstName = '%s' and LastName = '%s'",
+				prof.getFirstName(), prof.getLastName());
 		executeUpdate(query);
 		return true;
 	}
