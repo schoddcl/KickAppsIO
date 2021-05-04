@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 
-class WhiteBoxIntegrationTests {
+class WhiteBoxTests {
 
 	@Test
 	void CanUpdateSubmissionsTableFromAddWindow() {
