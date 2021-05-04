@@ -156,7 +156,7 @@ public class DBConnector {
 		executeUpdate(query);
 		return true;
 	}
-	
+
 	public boolean deleteProfessorByFirstAndLastName(Professor prof) {
 		String query;
 		query = String.format("DELETE FROM tblProfessors WHERE firstName = '%s' and LastName = '%s'",
