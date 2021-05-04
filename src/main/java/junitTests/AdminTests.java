@@ -1,7 +1,5 @@
 package junitTests;
 
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
@@ -12,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.example.Admin;
+import org.example.DBConnector;
+import org.example.Professor;
 import org.junit.jupiter.api.Test;
 
 class AdminTests {
@@ -20,82 +20,38 @@ class AdminTests {
 	void canCallAccessSubmissions() {
 		String result = "";
 		Admin a = new Admin("Luke", "Sarrazine", "Admin");
-		ResultSet rs = a.accessSubmissions();
-		try {
-			while(rs.next()) {
-				result = rs.getString(3);
-				break;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		assertEquals("Lukas", result);
+		assertTrue(a.accessSubmissions() instanceof ResultSet);
 	}
-	
+
 	@Test
 	void canCallConfirmSubmission() {
-		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine", "Admin");
-		a.confirmSubmission(6, 1, "Paul", "HiIm", 5.0, "KickApps University", "Dean", 200, "Ph. D", "pending", 0);
-		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 6", true);
-		try {
-			while(rs.next()) {
-				result = rs.getString(10);
-				break;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		assertEquals("Confirmed", result);
-		connectDatabase("DELETE FROM tblProfessors WHERE lastName = 'HiIm'", false);
+		Professor testProf = new Professor(-1, "WhiteBoxTestFName", "WhiteBoxTestLName", 1.0, "WhiteBoxTest", "WhiteBoxTest", 1, "WhiteBoxTest");
+		Admin a = new TestAdmin("Luke", "Sarrazine", "Admin");
+		assertTrue(a.confirmSubmission(testProf));
 	}
-	
+
 	@Test
 	void canCallDenySubmission() {
-		String result = "";
-		Admin a = new Admin("Luke", "Sarrazine", "Admin");
-		a.denySubmission(6);
-		ResultSet rs = connectDatabase("Select * from tblAdmissions where subID = 6", true);
-		try {
-			while(rs.next()) {
-				result = rs.getString(10);
-				break;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		assertEquals("Denied", result);
+		Professor testProf = new Professor(-1, "WhiteBoxTestFName", "WhiteBoxTestLName", 1.0, "WhiteBoxTest", "WhiteBoxTest", 1, "WhiteBoxTest");
+		Admin a = new TestAdmin("Luke", "Sarrazine", "Admin");
+		assertTrue(a.denySubmission(testProf));
 	}
-	
-	public ResultSet connectDatabase(String query, boolean isQuery) {
-		// Connect to database
-		ResultSet rs = null;
-		try {
-			DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-			String dbURL = "jdbc:sqlserver://kickapps.database.windows.net:1433;database=KickApps;user=KickApps@kickapps;password={Cse201Server};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-			String user = "KickApps@kickapps";
-			String pass = "Cse201Server";
-			Connection conn = DriverManager.getConnection(dbURL, user, pass);
-			if (conn != null) {
-				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
-				
-				Statement statement = conn.createStatement();
-				
-				if(isQuery) {
-					// Get the table of the professors
-					rs = statement.executeQuery(query);
-					return rs;
-				}
-				statement.executeUpdate(query);
-				return null;
-			}
+}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+class TestAdmin extends Admin {
+
+	public TestAdmin(String username, String password, String permission) {
+		super(username, password, permission);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean confirmSubmission(Professor prof) {
+		return true;
+	}
+
+	@Override
+	public boolean denySubmission(Professor prof) {
+		return true;
 	}
 }

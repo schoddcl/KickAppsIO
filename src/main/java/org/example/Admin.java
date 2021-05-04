@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,23 +12,22 @@ public class Admin extends User {
 	}
 
 	public ResultSet accessSubmissions() {
-		String query = "Select * From tblAdmissions";
-		ResultSet rs = connect(query, true);
-		return rs;
+		DBConnector connector = new DBConnector();
+ 		Connection conn = connector.connect();
+		return connector.getAllSubmissionsResultSet(conn);
 	}
-	
-	public void confirmSubmission(int subID, int profileID, String firstName, 
-			String lastName, double rateProfScore, String college, String position, int yearsWorked, String degree, String stat, int adminID) {
-		String query = "UPDATE tblAdmissions SET stat = 'Confirmed' where subID = " + subID;
-		connect(query, false);
-		query = "INSERT INTO tblProfessors(profileID, firstName, lastName, rateProfScore, college, position, yearsWorked, degree) "
-				+ "VALUES('" + profileID + "','" + firstName + "','" + lastName + "'," + rateProfScore + ",'"
-				+ college + "','" + position + "'," + yearsWorked + ",'" + degree + "')";
-		connect(query, false);
+
+	public boolean confirmSubmission(Professor prof) {
+		DBConnector connector = new DBConnector();
+ 		Connection conn = connector.connect();
+ 		connector.confirmSubmission(conn, prof);
+ 		return true;
 	}
-	
-	public void denySubmission(int subID) {
-		String query = "UPDATE tblAdmissions SET stat = 'Denied' where subID = " + subID;
-		connect(query, false);
+
+	public boolean denySubmission(Professor prof) {
+		DBConnector connector = new DBConnector();
+ 		Connection conn = connector.connect();
+ 		connector.denySubmission(conn, prof);
+ 		return true;
 	}
 }
