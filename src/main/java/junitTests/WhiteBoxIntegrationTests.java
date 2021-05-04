@@ -12,12 +12,14 @@ import org.example.Professor;
 import org.example.SubmissionsController;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
+
 class WhiteBoxIntegrationTests {
 
 	@Test
 	void CanUpdateSubmissionsTableFromAddWindow() {
 		AddController addController = new AddController();
-		addController.getSubmissionsForUser(3, null, null)
+		assertTrue(addController.getSubmissionsForUser(3) instanceof ObservableList<?>);
 	}
 	
 	@Test
