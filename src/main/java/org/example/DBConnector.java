@@ -96,11 +96,11 @@ public class DBConnector {
 		try {
 			while (rs.next()) {
 				if (rs.getString(9) == null) {
-					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), "", rs.getString(10), rs.getInt(2)));
+					professors.add(new Professor(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
+							rs.getString(6), rs.getString(7), rs.getInt(8), "", rs.getString(10), rs.getInt(1)));
 				} else {
 					professors.add(new Professor(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getDouble(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getInt(2)));
+							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getInt(1)));
 				}
 			}
 		} catch (SQLException e) {
@@ -167,6 +167,7 @@ public class DBConnector {
 
 	public void denySubmission(Connection conn, Professor prof) {
 		String query = "UPDATE tblAdmissions SET stat = 'Denied' WHERE subID = " + prof.getSubID();
+		System.out.print(query);
 		executeUpdate(query);
 	}
 }

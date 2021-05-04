@@ -161,7 +161,6 @@ public class SubmissionsController implements Initializable {
  	}
 
 	public boolean setTable(int profileID) {
-
 		DBConnector dbconnector = new DBConnector();
 		Connection conn = dbconnector.connect();
 		this.profileID = profileID;
@@ -220,7 +219,6 @@ public class SubmissionsController implements Initializable {
 				// Custom cell with comments feature
 				return new DenyButtonCell();
 			}
-
 		});
 
 		ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
