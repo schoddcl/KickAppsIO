@@ -156,6 +156,14 @@ public class DBConnector {
 		executeUpdate(query);
 		return true;
 	}
+	
+	public boolean deleteProfessor(Professor prof) {
+		String query;
+		query = String.format("DELETE FROM tblProfessors (firstName, LastName, rateProfScore, college, position, yearsWorked, degree) VALUES('%s', '%s', %.2f, '%s', '%s', %d, '%s')",
+				prof.getFirstName(), prof.getLastName(), prof.getRating(), prof.getCollege(), prof.getPosition(), prof.getYearsWorked(), prof.getDegree());
+		executeUpdate(query);
+		return true;
+	}
 
 	public void denySubmission(Connection conn, Professor prof) {
 		String query = "UPDATE tblAdmissions SET stat = 'Denied' WHERE subID = " + prof.getSubID();

@@ -29,9 +29,23 @@ class WhiteBoxIntegrationTests {
 	
 	@Test
 	void AddingProfessorShowsUpInDatabase() {
+		Professor testProf = new Professor(-1, "WhiteBoxTestFirstName", "WhiteBoxTestLastName", 1.0, "WhiteBoxTest", "WhiteBoxTest", 1, "WhiteBoxTest");
 		DBConnector connector = new DBConnector();
  		Connection conn = connector.connect();
-		assertTrue(connector.addProfessor(new Professor(-1, "WhiteBoxTest", "WhiteBoxTest", 1.0, "WhiteBoxTest", "WhiteBoxTest", 1, "WhiteBoxTest")));
-		connecto
+		assertTrue(connector.addProfessor(testProf));
+		ResultSet rs = connector.getProfessorResultSet(conn);
+		String firstName = "";
+		String lastName = "";
+		try {
+			rs.last();
+			firstName = rs.getString(3);
+			lastName = rs.getString(4);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertEquals("WhiteBoxTestFirstName", firstName);
+		assertEquals("WhiteBoxTestLastName", lastName);
+		assertTrue(connector.deleteProfessor(testProf));
 	}
 }
