@@ -174,60 +174,65 @@ public class SubmissionsController implements Initializable {
 			profileIDLabel.setText("Profile: Default User");
 		}
 		// From DBConnector class connects to the database
-				rs = dbconnector.getAllSubmissionsResultSet(conn);
-				System.out.print(profileID);
+		rs = getAllPendingSubmissions();
 
-				// Set columns of the table
-				firstName.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
-				lastName.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
-				rating.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
-				college.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
-				position.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
-				yearsWorked.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
-				degree.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
+		// Set columns of the table
+		firstName.setCellValueFactory(new PropertyValueFactory<Professor, String>("firstName"));
+		lastName.setCellValueFactory(new PropertyValueFactory<Professor, String>("lastName"));
+		rating.setCellValueFactory(new PropertyValueFactory<Professor, String>("rating"));
+		college.setCellValueFactory(new PropertyValueFactory<Professor, String>("college"));
+		position.setCellValueFactory(new PropertyValueFactory<Professor, String>("position"));
+		yearsWorked.setCellValueFactory(new PropertyValueFactory<Professor, String>("yearsWorked"));
+		degree.setCellValueFactory(new PropertyValueFactory<Professor, String>("degree"));
 
-				confirm.setCellValueFactory(
-						new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
-
-							@Override
-							public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> p) {
-								return new SimpleStringProperty(p.getValue() != null, null);
-							}
-						});
-
-				confirm.setCellFactory(new Callback<TableColumn<Professor, String>, TableCell<Professor, String>>() {
+		confirm.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
 
 					@Override
-					public TableCell<Professor, String> call(TableColumn<Professor, String> p) {
-						// Custom cell with comments feature
-						return new ConfirmButtonCell();
+					public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> p) {
+						return new SimpleStringProperty(p.getValue() != null, null);
 					}
-
 				});
 
-				deny.setCellValueFactory(
-						new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
+		confirm.setCellFactory(new Callback<TableColumn<Professor, String>, TableCell<Professor, String>>() {
 
-							@Override
-							public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> p) {
-								return new SimpleStringProperty(p.getValue() != null, null);
-							}
-						});
+			@Override
+			public TableCell<Professor, String> call(TableColumn<Professor, String> p) {
+				// Custom cell with comments feature
+				return new ConfirmButtonCell();
+			}
 
-				deny.setCellFactory(new Callback<TableColumn<Professor, String>, TableCell<Professor, String>>() {
+		});
+
+		deny.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
 
 					@Override
-					public TableCell<Professor, String> call(TableColumn<Professor, String> p) {
-						// Custom cell with comments feature
-						return new DenyButtonCell();
+					public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> p) {
+						return new SimpleStringProperty(p.getValue() != null, null);
 					}
-
 				});
 
-				ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
+		deny.setCellFactory(new Callback<TableColumn<Professor, String>, TableCell<Professor, String>>() {
 
-				// Loads the data into table
-				tableView.setItems(professors);
-				return true;
+			@Override
+			public TableCell<Professor, String> call(TableColumn<Professor, String> p) {
+				// Custom cell with comments feature
+				return new DenyButtonCell();
+			}
+
+		});
+
+		ObservableList<Professor> professors = dbconnector.getSubmissionsObservableList(rs);
+
+		// Loads the data into table
+		tableView.setItems(professors);
+		return true;
+	}
+
+	public ResultSet getAllPendingSubmissions() {
+		DBConnector dbconnector = new DBConnector();
+		Connection conn = dbconnector.connect();
+		return dbconnector.getAllSubmissionsResultSet(conn);
 	}
 }

@@ -25,7 +25,7 @@ class WhiteBoxTests {
 	@Test
 	void CanUpdateSubmissionsTableFromAdminSubmissionsWindow() {
 		SubmissionsController submissionsController = new SubmissionsController();
-		assertTrue(submissionsController.setTable(3));
+		assertTrue(submissionsController.getAllPendingSubmissions() instanceof ResultSet);
 	}
 	
 	@Test
