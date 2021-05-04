@@ -6,8 +6,6 @@
 .table-view {
 	-fx-background-image: url("lavendermc.jpg");
 	-fx-background-position: center bottom;
-	-fx-background-size: cover;
-	-fx-background-attachment: fixed;
 	-fx-text-fill: black;
 }
 

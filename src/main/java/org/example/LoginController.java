@@ -50,7 +50,7 @@ public class LoginController {
 			window.close();
 
 			Stage oldWindow = oldStage;
-			oldStage.close();
+			oldWindow.close();
 
 			Controller controller = fxmlLoader.getController();
 			Stage newHomepage = new Stage();

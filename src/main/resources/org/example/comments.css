@@ -9,6 +9,7 @@
 	-fx-background-size: cover;
 	-fx-background-attachment: fixed;
 	-fx-text-fill: black;
+	
 }
 
 
@@ -22,6 +23,7 @@
 	-fx-background-color: rgba(250.0,250.0,250.0,0.3);
 
 }
+
 .column-header {
 	-fx-background-color:white;	
 }
